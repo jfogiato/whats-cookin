@@ -973,13 +973,32 @@ describe('User', () => {
   it('should be able to save recipes', () => {
     user.toggleSaveRecipe(recipe1);
     expect(user.savedRecipes).to.deep.equal([recipe1]);
+    expect(recipe1.saved).to.equal(true);
+    user.toggleSaveRecipe(recipe2);
+    expect(user.savedRecipes).to.deep.equal([recipe1, recipe2]);
+    expect(recipe2.saved).to.equal(true);
+    user.toggleSaveRecipe(recipe3);
+    expect(user.savedRecipes).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(recipe3.saved).to.equal(true);
   });
     
-  it.skip('should do a thing', () => {
-
+  it('should be able to unsave a recipe', () => {
+    user.toggleSaveRecipe(recipe1);
+    expect(user.savedRecipes).to.deep.equal([recipe1]);
+    expect(recipe1.saved).to.equal(true);
+    user.toggleSaveRecipe(recipe1);
+    expect(user.savedRecipes).to.deep.equal([]);
+    expect(recipe1.saved).to.equal(false);
   });
     
-  it.skip('should do a thing', () => {
-
+  it('should be able to unsave any recipe', () => {
+    user.toggleSaveRecipe(recipe1);
+    user.toggleSaveRecipe(recipe2);
+    user.toggleSaveRecipe(recipe3);
+    expect(user.savedRecipes).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(recipe2.saved).to.equal(true);
+    user.toggleSaveRecipe(recipe2);
+    expect(user.savedRecipes).to.deep.equal([recipe1, recipe3]);
+    expect(recipe2.saved).to.equal(false);
   });
 });

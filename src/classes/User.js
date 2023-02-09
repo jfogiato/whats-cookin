@@ -7,11 +7,14 @@ class User {
   }
 
   toggleSaveRecipe(recipe) {
-    recipe.saveThisRec
-    this.savedRecipes.find(element => recipe.id === element.id)
-
-
-    // this.savedRecipes.some((element, index) => element.id === recipe.id) ? this.savedRecipes.splice(index, 1) : this.savedRecipes.push(recipe);
+    if (recipe.saved) {
+      this.savedRecipes.forEach((element, index) => {
+        element.id === recipe.id ? this.savedRecipes.splice(index, 1) : element;
+      });
+    } else {
+      this.savedRecipes.push(recipe);
+    }
+    recipe.toggleSave();
   }
 }
 
