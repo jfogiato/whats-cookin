@@ -290,4 +290,11 @@ describe('Recipe', () => {
       "6. Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack.Top with ice cream and a drizzle of chocolate sauce."
       ]);
   });
+
+  it('should be able to flag itself as saved', () => {
+    recipe.toggleSave();
+    expect(recipe.saved).to.equal(true);
+    recipe.toggleSave();
+    expect(recipe.saved).to.equal(false);
+  });
 });
