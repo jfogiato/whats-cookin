@@ -16,25 +16,15 @@ class User {
     }
     recipe.toggleSave();
   }
+
+  filterSavedByTag(tag) {
+    return this.savedRecipes.filter(recipe => recipe.tags.includes(tag));
+  }
+
+  filterSavedByName(name) {
+    return this.savedRecipes.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
+  }
+
 }
 
-
-
-
-
-
-/*
-
-name :
-id:
-pantry: [{}, {}]
-recipesToCook: []
-
-
-
-Create classes and methods that can:
-- Allow a user to add/remove a recipe to their recipesToCook list (add to my recipesToCook) (this will both add AND remove aka toggle)
-- Filter my recipesToCook by a tag. (Extension option: filter by multiple tags)
-- Filter my recipesToCook by its name. (Extension option: filter by name or ingredients)
-*/
 export default User;
