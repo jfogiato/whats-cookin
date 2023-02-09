@@ -6,6 +6,7 @@ class Recipe {
     this.instructions = recipeData.instructions;
     this.name = recipeData.name;
     this.tags = recipeData.tags;
+    this.saved = false;
   }
 
   matchIngredients(ingredientData) {
@@ -46,8 +47,12 @@ class Recipe {
   }
 
   getInstructions() {
-    const instructions = this.instructions.map(step => `${step.number}. ${step.instruction}`)
+    const instructions = this.instructions.map(step => `${step.instruction}`)
     return instructions;
+  }
+
+  toggleSave() {
+    this.saved = !this.saved;
   }
 }
 
