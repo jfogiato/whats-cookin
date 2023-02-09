@@ -5,8 +5,10 @@ import './images/turing-logo.png';
 import './images/heart.png';
 import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
+import User from './classes/User';
 import ingredientsData from './data/ingredients';
 import recipeData from './data/recipes';
+import usersData from './data/users';
 
 // global variables
 const recipeRepo = new RecipeRepository(recipeData);
@@ -15,15 +17,20 @@ const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
 const filterDropdown = document.getElementById('filterDropdown');
 const searchBar = document.getElementById('searchBar')
-let modalRecipe 
-// const saveButton = document.getElementById('saveBtn')
+const navMyRecipes = document.getElementById('navMyRecipes')
+const navUserInfo = document.getElementById('navUserInfo')
+let modalRecipe;
+let currentUser;
 
 //event listeners
-window.addEventListener('load', () => createRecipeCards(recipeRepo.recipes));
+window.addEventListener('load', () => {
+  getRandomUser()
+  createRecipeCards(recipeRepo.recipes);
+})
+
 recipeSection.addEventListener('click', createRecipeModal);
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
-// saveButton.addEventListener('click', toggleSavedRecipe);
 
 
 // Let's clean this up to be a proper form submission..?
@@ -89,6 +96,7 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
+  createRecipeCards(recipeRepo.recipes)
   if(event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
   }
@@ -107,6 +115,10 @@ function searchRecipes() {
 }
 
 function toggleSaveRecipe(event) {
-console.log(modalRecipe)
-    // currentUser.toggleSaveRecipe(modalRecipe)
+  currentUser.toggleSaveRecipe(modalRecipe)
+}
+
+function getRandomUser(){
+  currentUser = new User(usersData[Math.floor(Math.random() * usersData.length)])
+  navUserInfo.innerText = currentUser.name
 }
