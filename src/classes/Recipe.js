@@ -47,7 +47,7 @@ class Recipe {
   }
 
   getInstructions() {
-    const instructions = this.instructions.map(step => `${step.number}. ${step.instruction}`)
+    const instructions = this.instructions.map(step => `${step.instruction}`)
     return instructions;
   }
 
