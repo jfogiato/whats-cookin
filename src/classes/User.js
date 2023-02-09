@@ -9,10 +9,10 @@ class User {
   toggleSaveRecipe(recipe) {
     if (recipe.saved) {
       this.savedRecipes.forEach((element, index) => {
-        element.id === recipe.id ? this.savedRecipes.splice(index, 1) : element;
+        element.id === recipe.id ? this.savedRecipes.splice(index, 1) : null;
       });
     } else {
-      this.savedRecipes.push(recipe);
+      this.savedRecipes.unshift(recipe);
     }
     recipe.toggleSave();
   }
