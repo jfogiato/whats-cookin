@@ -1,53 +1,72 @@
 import './styles.css';
 // import apiCalls from './apiCalls';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import './images/heart.png';
 import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
+import User from './classes/User';
 import ingredientsData from './data/ingredients';
 import recipeData from './data/recipes';
+import usersData from './data/users';
 
 // global variables
-const recipeRepo = new RecipeRepository(recipeData);
-
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
 const filterDropdown = document.getElementById('filterDropdown');
-const searchBar = document.getElementById('searchBar')
-let modalRecipe 
-// const saveButton = document.getElementById('saveBtn')
+const searchBar = document.getElementById('searchBar');
+const navMyRecipes = document.getElementById('navMyRecipes');
+const navUserInfo = document.getElementById('navUserInfo');
+const logo = document.getElementById('logo');
+
+const recipeRepo = new RecipeRepository(recipeData);
+let modalRecipe;
+let currentUser;
+let savedView = false;
 
 //event listeners
-window.addEventListener('load', () => createRecipeCards(recipeRepo.recipes));
-recipeSection.addEventListener('click', createRecipeModal);
+window.addEventListener('load', () => {
+  getRandomUser();
+  createRecipeCards(recipeRepo.recipes);
+})
+
+recipeSection.addEventListener('click', (event) => {
+  if(event.target.className !== "all-recipes"){
+    createRecipeModal(event);
+  }
+});
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
-// saveButton.addEventListener('click', toggleSavedRecipe);
-
+navMyRecipes.addEventListener('click', showSavedRecipes);
 
 // Let's clean this up to be a proper form submission..?
 searchBar.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
-    searchRecipes()
+    searchRecipes();
   }
 });
+
+logo.addEventListener('click', goHome);
+
+
+
+
+
 
 //functions
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
-        let size = (2 - (recipe.length / 65)).toFixed(2);
+        let size = (2 - (recipe.name.length / 65)).toFixed(2);
+        let hidden = "heart-icon";
+        if(!recipe.saved){
+          hidden = "heart-icon hidden";
+        }
         recipeSection.innerHTML += `
         <article class="recipe-card" data-parent="${recipe.id}">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
-            <img class="heart-icon hidden" id="heartIcon" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
+            <img class="${hidden}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
-        let heart = document.getElementById('heartIcon')
-        if(recipe.saved){
-            toggleHidden(heart)
-        }
     });
 }
 
@@ -55,8 +74,8 @@ function createRecipeModal(event) {
   toggleHidden(modalSection);
   let recipeID = +(event.target.dataset.parent);
   modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
-  let buttonText
-  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes"
+  let buttonText;
+  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
   modalSection.innerHTML = `
   <div class="recipe-popup">
       <h2>${modalRecipe.name}</h2>
@@ -89,24 +108,39 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
-  if(event.target.id === "recipeModalBackground"){
+  savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
+  if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
-  }
+  } 
 }
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
-    let filteredRecipes = recipeRepo.filterByTag(tag);
+    let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
     createRecipeCards(filteredRecipes);
 }
 
 function searchRecipes() {
   let keyword = searchBar.value;
-  let searchedRecipes = recipeRepo.filterByName(keyword);
+  let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
   createRecipeCards(searchedRecipes);
 }
 
 function toggleSaveRecipe(event) {
-console.log(modalRecipe)
-    // currentUser.toggleSaveRecipe(modalRecipe)
+  currentUser.toggleSaveRecipe(modalRecipe);
+}
+
+function getRandomUser(){
+  currentUser = new User(usersData[Math.floor(Math.random() * usersData.length)]);
+  navUserInfo.innerText = currentUser.name;
+}
+
+function showSavedRecipes() {
+  savedView = true;
+  createRecipeCards(currentUser.savedRecipes);
+}
+
+function goHome() {
+  savedView = false;
+  createRecipeCards(recipeRepo.recipes);
 }

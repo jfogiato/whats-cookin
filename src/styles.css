@@ -1,9 +1,9 @@
 body {
   padding-top: 15vmin;
   text-align: center;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 .nav-bar {
@@ -18,8 +18,14 @@ body {
   z-index: 3;
 }
 
-.direction-list {
+.nav-links {
   list-style: none;
+  display: flex;
+  width: 50%;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-right: 4vmin;
+  cursor: pointer;
 }
 
 .all-recipes {
@@ -37,6 +43,10 @@ body {
   background-color: #E1E1E1;
   margin: 3vmin;
   position: relative;
+}
+
+.recipe-card:hover {
+  cursor: pointer;
 }
 
 h3 {
@@ -111,15 +121,7 @@ h3 {
   height: 6vmin;
   width: 6vmin;
   padding: 1vmin 3vmin;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  width: 35%;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-right: 4vmin;
+  cursor: pointer;
 }
 
 .modal-bg {
@@ -142,6 +144,8 @@ h3 {
   border-radius: 5px;
   background-color: #E1E1E1;
   margin: 3vmin;
+  overflow: auto;
+  padding: 1vmin;
 }
 
 
