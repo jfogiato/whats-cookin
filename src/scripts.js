@@ -48,18 +48,17 @@ searchBar.addEventListener('keypress', function (e) {
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
-        let size = (2 - (recipe.length / 65)).toFixed(2);
+        let size = (2 - (recipe.name.length / 65)).toFixed(2);
         let hidden = "heart-icon";
         if(!recipe.saved){
           hidden = "heart-icon hidden"
-      }
+        }
         recipeSection.innerHTML += `
         <article class="recipe-card" data-parent="${recipe.id}">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
-            <img class="${hidden}" id="heartIcon" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
+            <img class="${hidden}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
-        let heart = document.getElementById('heartIcon')
     });
 }
 
