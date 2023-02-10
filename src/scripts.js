@@ -10,14 +10,15 @@ import recipeData from './data/recipes';
 import usersData from './data/users';
 
 // global variables
-const recipeRepo = new RecipeRepository(recipeData);
-
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
 const filterDropdown = document.getElementById('filterDropdown');
 const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
+const logo = document.getElementById('logo');
+
+const recipeRepo = new RecipeRepository(recipeData);
 let modalRecipe;
 let currentUser;
 let savedView = false;
@@ -43,6 +44,13 @@ searchBar.addEventListener('keypress', function (e) {
     searchRecipes();
   }
 });
+
+logo.addEventListener('click', goHome);
+
+
+
+
+
 
 //functions
 function createRecipeCards(recipes) {
@@ -130,4 +138,9 @@ function getRandomUser(){
 function showSavedRecipes() {
   savedView = true;
   createRecipeCards(currentUser.savedRecipes);
+}
+
+function goHome() {
+  savedView = false;
+  createRecipeCards(recipeRepo.recipes);
 }
