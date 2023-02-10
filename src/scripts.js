@@ -28,7 +28,11 @@ window.addEventListener('load', () => {
   createRecipeCards(recipeRepo.recipes);
 })
 
-recipeSection.addEventListener('click', createRecipeModal);
+recipeSection.addEventListener('click', (event) => {
+  if(event.target.className !== "all-recipes"){
+    createRecipeModal(event)
+  }
+});
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
 
