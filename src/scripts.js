@@ -2,12 +2,8 @@ import './styles.css';
 import apiCalls from './apiCalls';
 import './images/turing-logo.png';
 import './images/heart.png';
-// import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
-import ingredientsData from './data/ingredients';
-import recipeData from './data/recipes';
-import usersData from './data/users';
 
 // global variables
 const recipeSection = document.getElementById('allRecipes');
@@ -18,22 +14,30 @@ const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
 const logo = document.getElementById('logo');
 
-const recipeRepo = new RecipeRepository(recipeData);
+let users;
+let ingredients;
+let recipes;
+let recipeRepo;
 let modalRecipe;
 let currentUser;
 let savedView = false;
 
-//event listeners
-window.addEventListener('load', () => {
+apiCalls().then(data => {
+  users = data[0].usersData;
+  ingredients = data[1].ingredientsData;
+  recipes = data[2].recipeData;
+  recipeRepo = new RecipeRepository(recipes);
   getRandomUser();
   createRecipeCards(recipeRepo.recipes);
-})
+});
 
+//event listeners
 recipeSection.addEventListener('click', (event) => {
   if(event.target.className !== "all-recipes"){
     createRecipeModal(event);
   }
 });
+
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
 navMyRecipes.addEventListener('click', showSavedRecipes);
@@ -46,10 +50,6 @@ searchBar.addEventListener('keypress', function (e) {
 });
 
 logo.addEventListener('click', goHome);
-
-
-
-
 
 
 //functions
@@ -68,7 +68,7 @@ function createRecipeCards(recipes) {
             <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
     });
-}
+};
 
 function createRecipeModal(event) {
   toggleHidden(modalSection);
@@ -83,64 +83,64 @@ function createRecipeModal(event) {
       <img class="recipe-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
       <ul class="ingredient-list">
           <h3>Ingredients:</h3>
-          ${createList(modalRecipe.listIngredients(ingredientsData))}
+          ${createList(modalRecipe.listIngredients(ingredients))}
       </ul>
       </div>
       <ol class="direction-list">
       <h3>Directions:</h3>
       ${createList(modalRecipe.getInstructions())}
       </ol>
-      <h4>TOTAL COST $${+(modalRecipe.listCost(ingredientsData))}</h4>
+      <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
       <button class="save-button" id="saveBtn">${buttonText}</button>
   </div>`;
   document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
-}
+};
 
 function createList(recipe) {
     return recipe.reduce((acc, cv) => {
         acc += `<li>${cv}</li>`;
         return acc;
     }, "");
-}
+};
 
 function toggleHidden(element) {
   element.classList.toggle('hidden');
-}
+};
 
 function collapseRecipe(event) {
   savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
   if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
-  } 
-}
+  };
+};
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
     let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
     createRecipeCards(filteredRecipes);
-}
+};
 
 function searchRecipes() {
   let keyword = searchBar.value;
   let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
   createRecipeCards(searchedRecipes);
-}
+};
 
-function toggleSaveRecipe(event) {
+function toggleSaveRecipe() {
   currentUser.toggleSaveRecipe(modalRecipe);
-}
+};
 
-function getRandomUser(){
-  currentUser = new User(usersData[Math.floor(Math.random() * usersData.length)]);
+function getRandomUser() {
+  currentUser = new User(users[Math.floor(Math.random() * users.length)]);
   navUserInfo.innerText = currentUser.name;
-}
+};
 
 function showSavedRecipes() {
   savedView = true;
   createRecipeCards(currentUser.savedRecipes);
-}
+};
 
 function goHome() {
   savedView = false;
   createRecipeCards(recipeRepo.recipes);
-}
+};
