@@ -1,9 +1,9 @@
 body {
   padding-top: 15vmin;
   text-align: center;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 .nav-bar {
@@ -16,10 +16,6 @@ body {
   background-color: white;
   box-shadow: 0px 3px 8px #888888;
   z-index: 3;
-}
-
-.direction-list {
-  list-style: none;
 }
 
 .all-recipes {

@@ -1,6 +1,5 @@
 import './styles.css';
 // import apiCalls from './apiCalls';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 import './images/heart.png';
 import Recipe from './classes/Recipe';
@@ -16,31 +15,32 @@ const recipeRepo = new RecipeRepository(recipeData);
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
 const filterDropdown = document.getElementById('filterDropdown');
-const searchBar = document.getElementById('searchBar')
-const navMyRecipes = document.getElementById('navMyRecipes')
-const navUserInfo = document.getElementById('navUserInfo')
+const searchBar = document.getElementById('searchBar');
+const navMyRecipes = document.getElementById('navMyRecipes');
+const navUserInfo = document.getElementById('navUserInfo');
 let modalRecipe;
 let currentUser;
+let savedView = false;
 
 //event listeners
 window.addEventListener('load', () => {
-  getRandomUser()
+  getRandomUser();
   createRecipeCards(recipeRepo.recipes);
 })
 
 recipeSection.addEventListener('click', (event) => {
   if(event.target.className !== "all-recipes"){
-    createRecipeModal(event)
+    createRecipeModal(event);
   }
 });
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
-
+navMyRecipes.addEventListener('click', showSavedRecipes);
 
 // Let's clean this up to be a proper form submission..?
 searchBar.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
-    searchRecipes()
+    searchRecipes();
   }
 });
 
@@ -51,7 +51,7 @@ function createRecipeCards(recipes) {
         let size = (2 - (recipe.name.length / 65)).toFixed(2);
         let hidden = "heart-icon";
         if(!recipe.saved){
-          hidden = "heart-icon hidden"
+          hidden = "heart-icon hidden";
         }
         recipeSection.innerHTML += `
         <article class="recipe-card" data-parent="${recipe.id}">
@@ -66,8 +66,8 @@ function createRecipeModal(event) {
   toggleHidden(modalSection);
   let recipeID = +(event.target.dataset.parent);
   modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
-  let buttonText
-  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes"
+  let buttonText;
+  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
   modalSection.innerHTML = `
   <div class="recipe-popup">
       <h2>${modalRecipe.name}</h2>
@@ -100,29 +100,34 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
-  createRecipeCards(recipeRepo.recipes)
-  if(event.target.id === "recipeModalBackground"){
+  savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
+  if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
-  }
+  } 
 }
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
-    let filteredRecipes = recipeRepo.filterByTag(tag);
+    let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
     createRecipeCards(filteredRecipes);
 }
 
 function searchRecipes() {
   let keyword = searchBar.value;
-  let searchedRecipes = recipeRepo.filterByName(keyword);
+  let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
   createRecipeCards(searchedRecipes);
 }
 
 function toggleSaveRecipe(event) {
-  currentUser.toggleSaveRecipe(modalRecipe)
+  currentUser.toggleSaveRecipe(modalRecipe);
 }
 
 function getRandomUser(){
-  currentUser = new User(usersData[Math.floor(Math.random() * usersData.length)])
-  navUserInfo.innerText = currentUser.name
+  currentUser = new User(usersData[Math.floor(Math.random() * usersData.length)]);
+  navUserInfo.innerText = currentUser.name;
+}
+
+function showSavedRecipes() {
+  savedView = true;
+  createRecipeCards(currentUser.savedRecipes);
 }
