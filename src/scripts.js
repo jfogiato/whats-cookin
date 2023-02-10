@@ -1,8 +1,8 @@
 import './styles.css';
-// import apiCalls from './apiCalls';
+import apiCalls from './apiCalls';
 import './images/turing-logo.png';
 import './images/heart.png';
-import Recipe from './classes/Recipe';
+// import Recipe from './classes/Recipe';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 import ingredientsData from './data/ingredients';
