@@ -20,6 +20,7 @@ let recipeRepo;
 let modalRecipe;
 let currentUser;
 let savedView = false;
+let currentView;
 
 //event listeners
 recipeSection.addEventListener('click', createRecipeModal);
@@ -35,8 +36,9 @@ apiCalls().then(data => {
   ingredients = data[1].ingredientsData;
   recipes = data[2].recipeData;
   recipeRepo = new RecipeRepository(recipes);
+  currentView = recipeRepo.recipes;
   getRandomUser();
-  createRecipeCards(recipeRepo.recipes);
+  createRecipeCards(currentView);
 });
 
 function createRecipeCards(recipes) {
@@ -96,7 +98,8 @@ function toggleHidden(element) {
 };
 
 function collapseRecipe(event) {
-  savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
+  // savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
+  createRecipeCards(currentView)
   if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
   };
@@ -104,19 +107,27 @@ function collapseRecipe(event) {
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
+    console.log(currentView)
     let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
-    createRecipeCards(filteredRecipes);
+    currentView = filteredRecipes;
+    createRecipeCards(currentView);
 };
 
 function searchRecipes() {
   let keyword = searchBar.value;
+  console.log(currentView)
   let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
-  createRecipeCards(searchedRecipes);
+  currentView = searchedRecipes;
+  createRecipeCards(currentView);
 };
 
 function toggleSaveRecipe() {
   currentUser.toggleSaveRecipe(modalRecipe);
 };
+
+// function updateButtonText() {
+
+// };
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
@@ -125,10 +136,12 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  createRecipeCards(currentUser.savedRecipes);
+  currentView = currentUser.savedRecipes
+  createRecipeCards(currentView);
 };
 
 function goHome() {
   savedView = false;
-  createRecipeCards(recipeRepo.recipes);
+  currentView = recipeRepo.recipes
+  createRecipeCards(currentView);
 };
