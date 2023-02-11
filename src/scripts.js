@@ -13,7 +13,6 @@ const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
 const logo = document.getElementById('logo');
-
 let users;
 let ingredients;
 let recipes;
@@ -22,6 +21,15 @@ let modalRecipe;
 let currentUser;
 let savedView = false;
 
+//event listeners
+recipeSection.addEventListener('click', createRecipeModal);
+modalSection.addEventListener('click', collapseRecipe);
+filterDropdown.addEventListener('click', filterRecipes);
+navMyRecipes.addEventListener('click', showSavedRecipes);
+logo.addEventListener('click', goHome);
+searchBar.addEventListener('keyup', searchRecipes);
+
+//functions
 apiCalls().then(data => {
   users = data[0].usersData;
   ingredients = data[1].ingredientsData;
@@ -31,28 +39,6 @@ apiCalls().then(data => {
   createRecipeCards(recipeRepo.recipes);
 });
 
-//event listeners
-recipeSection.addEventListener('click', (event) => {
-  if(event.target.className !== "all-recipes"){
-    createRecipeModal(event);
-  }
-});
-
-modalSection.addEventListener('click', collapseRecipe);
-filterDropdown.addEventListener('click', filterRecipes);
-navMyRecipes.addEventListener('click', showSavedRecipes);
-
-// Let's clean this up to be a proper form submission..?
-searchBar.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    searchRecipes();
-  }
-});
-
-logo.addEventListener('click', goHome);
-
-
-//functions
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
@@ -71,29 +57,31 @@ function createRecipeCards(recipes) {
 };
 
 function createRecipeModal(event) {
-  toggleHidden(modalSection);
-  let recipeID = +(event.target.dataset.parent);
-  modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
-  let buttonText;
-  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
-  modalSection.innerHTML = `
-  <div class="recipe-popup">
-      <h2>${modalRecipe.name}</h2>
-      <div class="image-ingredients">
-      <img class="recipe-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
-      <ul class="ingredient-list">
-          <h3>Ingredients:</h3>
-          ${createList(modalRecipe.listIngredients(ingredients))}
-      </ul>
-      </div>
-      <ol class="direction-list">
-      <h3>Directions:</h3>
-      ${createList(modalRecipe.getInstructions())}
-      </ol>
-      <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
-      <button class="save-button" id="saveBtn">${buttonText}</button>
-  </div>`;
-  document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
+  if(event.target.className !== "all-recipes") {
+    toggleHidden(modalSection);
+    let recipeID = +(event.target.dataset.parent);
+    modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
+    let buttonText;
+    modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
+    modalSection.innerHTML = `
+    <div class="recipe-popup">
+        <h2>${modalRecipe.name}</h2>
+        <div class="image-ingredients">
+        <img class="recipe-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
+        <ul class="ingredient-list">
+            <h3>Ingredients:</h3>
+            ${createList(modalRecipe.listIngredients(ingredients))}
+        </ul>
+        </div>
+        <ol class="direction-list">
+        <h3>Directions:</h3>
+        ${createList(modalRecipe.getInstructions())}
+        </ol>
+        <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
+        <button class="save-button" id="saveBtn">${buttonText}</button>
+    </div>`;
+    document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
+  }
 };
 
 function createList(recipe) {
