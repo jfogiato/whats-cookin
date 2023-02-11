@@ -205,6 +205,16 @@ li {
   font-family: 'Oregano', cursive;
 }
 
+.footer-logo {
+  height: 14vmin;
+  width: 70vmin;
+  padding: 10vmin;
+}
+
 .hidden {
   display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

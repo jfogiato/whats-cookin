@@ -34,7 +34,13 @@ class Recipe {
   }
   
   listIngredients(ingredientData) {
-    return this.matchIngredients(ingredientData).map(element => `${+(element.quantity.amount)} ${element.quantity.unit} ${element.name}`);  
+    return this.matchIngredients(ingredientData).map(element => {
+      let amount = element.quantity.amount
+      if(amount.toString().length > 5) {
+        amount = element.quantity.amount.toFixed(2)
+      }
+      return `${amount} ${element.quantity.unit} ${element.name}`
+    });  
   }
 
   listCost(ingredientData) {
@@ -42,8 +48,7 @@ class Recipe {
       acc += (cv.estimatedCostInCents * cv.quantity.amount);
       return acc;
     }, 0);
-    
-    return totalCost * .01;
+    return Math.round(totalCost * .01);
   }
 
   getInstructions() {

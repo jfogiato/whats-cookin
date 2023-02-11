@@ -13,6 +13,7 @@ const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
 const logo = document.getElementById('logo');
+const body = document.querySelector('body');
 let users;
 let ingredients;
 let recipes;
@@ -61,6 +62,7 @@ function createRecipeCards(recipes) {
 function createRecipeModal(event) {
   if(event.target.className !== "all-recipes") {
     toggleHidden(modalSection);
+    body.classList.add('no-scroll')
     let recipeID = +(event.target.dataset.parent);
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
@@ -96,6 +98,7 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
+  body.classList.remove('no-scroll')
   createRecipeCards(currentView);
   if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
