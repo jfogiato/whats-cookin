@@ -56,7 +56,7 @@ function createRecipeCards(recipes) {
             <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
     });
-};
+}
 
 function createRecipeModal(event) {
   if(event.target.className !== "all-recipes") {
@@ -81,65 +81,65 @@ function createRecipeModal(event) {
         <button class="save-button" id="saveBtn">${updateButtonText()}</button>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
-  };
-};
+  }
+}
 
 function createList(recipe) {
     return recipe.reduce((acc, cv) => {
         acc += `<li>${cv}</li>`;
         return acc;
     }, "");
-};
+}
 
 function toggleHidden(element) {
   element.classList.toggle('hidden');
-};
+}
 
 function collapseRecipe(event) {
   createRecipeCards(currentView);
   if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
-  };
-};
+  }
+}
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
     let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
     currentView = filteredRecipes;
     createRecipeCards(currentView);
-};
+}
 
 function searchRecipes() {
   let keyword = searchBar.value;
   let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
   currentView = searchedRecipes;
   createRecipeCards(currentView);
-};
+}
 
 function toggleSaveRecipe() {
   currentUser.toggleSaveRecipe(modalRecipe);
   saveBtn.innerText = updateButtonText();
-};
+}
 
 function updateButtonText() {
   let buttonText;
   modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
   return buttonText;
-};
+}
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
   navUserInfo.innerText = currentUser.name;
-};
+}
 
 function showSavedRecipes() {
   savedView = true;
   currentView = currentUser.savedRecipes;
   createRecipeCards(currentView);
-};
+}
 
 function goHome() {
   savedView = false;
   currentView = recipeRepo.recipes;
   createRecipeCards(currentView);
-};
+}
