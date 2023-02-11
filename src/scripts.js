@@ -63,8 +63,6 @@ function createRecipeModal(event) {
     toggleHidden(modalSection);
     let recipeID = +(event.target.dataset.parent);
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
-    let buttonText;
-    modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
     modalSection.innerHTML = `
     <div class="recipe-popup">
         <h2>${modalRecipe.name}</h2>
@@ -80,10 +78,10 @@ function createRecipeModal(event) {
         ${createList(modalRecipe.getInstructions())}
         </ol>
         <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
-        <button class="save-button" id="saveBtn">${buttonText}</button>
+        <button class="save-button" id="saveBtn">${updateButtonText()}</button>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
-  }
+  };
 };
 
 function createList(recipe) {
@@ -98,8 +96,7 @@ function toggleHidden(element) {
 };
 
 function collapseRecipe(event) {
-  // savedView ? createRecipeCards(currentUser.savedRecipes) : createRecipeCards(recipeRepo.recipes);
-  createRecipeCards(currentView)
+  createRecipeCards(currentView);
   if (event.target.id === "recipeModalBackground"){
     toggleHidden(modalSection);
   };
@@ -107,7 +104,6 @@ function collapseRecipe(event) {
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
-    console.log(currentView)
     let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
     currentView = filteredRecipes;
     createRecipeCards(currentView);
@@ -115,7 +111,6 @@ function filterRecipes(event) {
 
 function searchRecipes() {
   let keyword = searchBar.value;
-  console.log(currentView)
   let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
   currentView = searchedRecipes;
   createRecipeCards(currentView);
@@ -123,11 +118,14 @@ function searchRecipes() {
 
 function toggleSaveRecipe() {
   currentUser.toggleSaveRecipe(modalRecipe);
+  saveBtn.innerText = updateButtonText();
 };
 
-// function updateButtonText() {
-
-// };
+function updateButtonText() {
+  let buttonText;
+  modalRecipe.saved ? buttonText = "Remove from Saved Recipes" : buttonText = "Add to Saved Recipes";
+  return buttonText;
+};
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
@@ -136,12 +134,12 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  currentView = currentUser.savedRecipes
+  currentView = currentUser.savedRecipes;
   createRecipeCards(currentView);
 };
 
 function goHome() {
   savedView = false;
-  currentView = recipeRepo.recipes
+  currentView = recipeRepo.recipes;
   createRecipeCards(currentView);
 };
