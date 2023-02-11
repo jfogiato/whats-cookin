@@ -1,11 +1,10 @@
 body {
   padding-top: 15vmin;
   text-align: center;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+  font-family: 'Rock Salt', cursive;
 }
 
+/* ALL NAV BAR CLASSES */
 .nav-bar {
   display: flex;
   width: 100%;
@@ -13,21 +12,86 @@ body {
   position: fixed;
   align-items: flex-end;
   top: 0;
+  right: 0;
   background-color: white;
   box-shadow: 0px 3px 8px #888888;
   z-index: 3;
 }
 
+.nav-logo {
+  height: 5vmin;
+  width: 25vmin;
+  padding: 1vmin 3vmin;
+  cursor: pointer;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
-  width: 50%;
+  width: 60%;
   align-items: flex-end;
   justify-content: space-between;
   padding-right: 4vmin;
   cursor: pointer;
 }
 
+.search-bar {
+  font-family: inherit;
+}
+
+.filter-header {
+  padding: 12px 16px;
+  padding-bottom: 0;
+  min-width: 160px;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  background-color: inherit;
+  font-family: inherit;
+}
+
+.navbar li:hover, .dropdown:hover .dropbtn {
+  background-color: #E1E1E1;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #FFFFFF;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content li {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content li:hover {
+  background-color: #E1E1E1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.title-logo {
+  height: 14vmin;
+  width: 70vmin;
+  padding: 10vmin;
+  cursor: pointer;
+}
+
+/* ALL RECIPE CARD CLASSES */
 .all-recipes {
   display: flex;
   flex-wrap: wrap;
@@ -49,11 +113,6 @@ body {
   cursor: pointer;
 }
 
-h3 {
-  margin: 0.2vmin;
-  /* font-size: 2.8rem; */
-}
-
 .recipe-img {
   height: 30vmin;
   width: 35vmin;
@@ -67,63 +126,13 @@ h3 {
   top: 0.7vmin
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
+/* Let's make this more specific or lumped into something else */
+h3 {
+  margin: 0.2vmin;
+  /* font-size: 2.8rem; */
 }
 
-/* Dropdown button */
-.dropdown .dropbtn {
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar li:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content li {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content li:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.title {
-  font-size: 4rem;
-}
-
-.logo {
-  height: 6vmin;
-  width: 6vmin;
-  padding: 1vmin 3vmin;
-  cursor: pointer;
-}
-
+/* ALL MODAL/POP-UP RECIPE CLASSES */
 .modal-bg {
   display: flex;
   justify-content: center;
@@ -148,6 +157,9 @@ h3 {
   padding: 1vmin;
 }
 
+.save-button {
+  font-family: inherit;
+}
 
 .image-ingredients{
   display: flex;
@@ -163,37 +175,6 @@ li {
   text-align: left;
   margin-bottom: 0.4vmin;
 }
-
-/* .ingredient-list > li {
-  margin: 0.1vmin 0.2vmin;
-} */
-
-/* Featured CSS Starters */
-
-/* .featured-recipe {
-  display: flex;
-  align-items: center;
-  width: 95%;
-}
-
-.featured-card {
-  width: 50vmin;
-  height: 53vmin;
-  border: 2px black solid;
-  border-radius: 5px;
-  box-shadow: 3px 3px 10px #888888;
-  background-color: #E1E1E1;
-  margin: 5vmin;
-}
-
-.featured-img {
-  width: 50vmin;
-  height: 45vmin;
-}
-
-.featured-directions > ol {
-  text-align: left;
-} */
 
 .hidden {
   display: none;

@@ -1,7 +1,7 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 import './images/turing-logo.png';
-import './images/heart.png';
+import './images/wc-logo.png';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 
