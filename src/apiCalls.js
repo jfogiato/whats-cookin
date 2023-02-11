@@ -1,4 +1,11 @@
-// Your fetch requests will live here!
+function fetchData(data) {
+    return fetch(`https://what-s-cookin-starter-kit.herokuapp.com/api/v1/${data}`)
+           .then(promise => promise.json())
+           .catch(error => console.log(`Could not fetch because: ${error}`));
+};
 
+const apiCalls = () => {
+    return Promise.all([fetchData('users'), fetchData('ingredients'), fetchData('recipes')]);
+};
 
-console.log('I will be a fetch request!')
+export default apiCalls;
