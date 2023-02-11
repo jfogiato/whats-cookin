@@ -20,7 +20,7 @@ body {
 
 .nav-logo {
   height: 7vmin;
-  width: 32vmin;
+  width: 20vmin;
   padding: 1vmin 3vmin;
 }
 
@@ -89,7 +89,7 @@ body {
 
 .title-logo {
   height: 14vmin;
-  width: 70vmin;
+  width: 80vmin;
   padding: 10vmin;
 }
 
@@ -207,7 +207,7 @@ li {
 
 .footer-logo {
   height: 14vmin;
-  width: 70vmin;
+  width: 80vmin;
   padding: 10vmin;
 }
 
