@@ -1,6 +1,6 @@
 import './styles.css';
 import apiCalls from './apiCalls';
-import './images/turing-logo.png';
+import './images/heart.png';
 import './images/wc-logo.png';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
@@ -44,7 +44,7 @@ apiCalls().then(data => {
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
-        let size = (1.6 - (recipe.name.length / 60)).toFixed(2);
+        let size = (1.6 - (recipe.name.length / 85)).toFixed(2);
         let hidden = "heart-icon";
         if(!recipe.saved){
           hidden = "heart-icon hidden";
@@ -53,7 +53,7 @@ function createRecipeCards(recipes) {
         <article class="recipe-card pointer" data-parent="${recipe.id}">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
             <img class="${hidden}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
-            <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
+            <h3 class="recipe-title" style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
     });
 }
