@@ -44,13 +44,13 @@ apiCalls().then(data => {
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
-        let size = (2 - (recipe.name.length / 65)).toFixed(2);
+        let size = (1.6 - (recipe.name.length / 60)).toFixed(2);
         let hidden = "heart-icon";
         if(!recipe.saved){
           hidden = "heart-icon hidden";
         }
         recipeSection.innerHTML += `
-        <article class="recipe-card" data-parent="${recipe.id}">
+        <article class="recipe-card pointer" data-parent="${recipe.id}">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
             <img class="${hidden}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
@@ -67,18 +67,18 @@ function createRecipeModal(event) {
     <div class="recipe-popup">
         <h2>${modalRecipe.name}</h2>
         <div class="image-ingredients">
-        <img class="recipe-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
-        <ul class="ingredient-list">
+        <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
+        <ul class="oregano-font">
             <h3>Ingredients:</h3>
             ${createList(modalRecipe.listIngredients(ingredients))}
         </ul>
         </div>
-        <ol class="direction-list">
+        <ol class="oregano-font">
         <h3>Directions:</h3>
         ${createList(modalRecipe.getInstructions())}
         </ol>
-        <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
-        <button class="save-button" id="saveBtn">${updateButtonText()}</button>
+        <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
+        <button class="save-button pointer" id="saveBtn">${updateButtonText()}</button>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
   }
@@ -129,7 +129,7 @@ function updateButtonText() {
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
-  navUserInfo.innerText = currentUser.name;
+  navUserInfo.innerHTML = `<span style="font-size: 1.3rem">👤</span>  ${currentUser.name}`;
 }
 
 function showSavedRecipes() {

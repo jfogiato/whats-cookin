@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oregano&family=Rock+Salt&display=swap" rel="stylesheet">
     <title>What's Cookin'</title>
 </head>
 <body>
     <nav class="nav-bar">
-        <img class="nav-logo" id="logo" src="./images/wc-logo.png" alt="What's Cookin' Navigation Logo/Take Me Home">
+        <img class="nav-logo pointer" id="logo" src="./images/wc-logo.png" alt="What's Cookin' Navigation Logo/Take Me Home">
         <menu class="nav-links">
-            <input type="text" placeholder="Search Recipes.." class="search-bar" id="searchBar">
-            <div class="dropdown">
+            <input type="text" placeholder="Search Recipes.." class="search-bar pointer" id="searchBar">
+            <div class="dropdown pointer">
                 <li class="dropbtn filter-header">Filter Recipes</li>
                   <div class="dropdown-content" id="filterDropdown">
                     <li>Appetizer</li>
@@ -24,8 +24,8 @@
                     <li>Side Dish</li>
                  </div>
             </div>
-            <li id="navMyRecipes">My Recipes</li>
-            <li id="navUserInfo"></li>
+            <li id="navMyRecipes" class="pointer">My Recipes</li>
+            <li id="navUserInfo" class="user-name"></li>
         </menu>
     </nav>
     <main>
@@ -33,16 +33,13 @@
         <!-- Clicked recipe will be displayed here -->
       </section>
         <header>
-            <img class="title-logo" id="titleLogo" src="./images/wc-logo.png" alt="What's Cookin' Title Logo/Take Me Home">
+            <img class="title-logo pointer" id="titleLogo" src="./images/wc-logo.png" alt="What's Cookin' Title Logo/Take Me Home">
         </header>
         <section class="all-recipes" id="allRecipes">
             <!-- Recipes and cards go here -->
         </section>
-        <section class="hidden" id="myRecipes">
-          <!-- Saved recipes and cards go here -->
-        </section>
         <footer>
-            <h4>Not finding what you're looking for? Try using the Search or Filter features to narrow it down!</h4>
+            <img class="footer-logo pointer" id="logo" src="./images/wc-logo.png" alt="What's Cookin' Footer Logo/Take Me Home">
         </footer>
     </main>
     <script src="bundle.js"></script>

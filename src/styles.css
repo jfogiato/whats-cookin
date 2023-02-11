@@ -19,10 +19,9 @@ body {
 }
 
 .nav-logo {
-  height: 5vmin;
-  width: 25vmin;
+  height: 7vmin;
+  width: 32vmin;
   padding: 1vmin 3vmin;
-  cursor: pointer;
 }
 
 .nav-links {
@@ -32,7 +31,7 @@ body {
   align-items: flex-end;
   justify-content: space-between;
   padding-right: 4vmin;
-  cursor: pointer;
+  margin-top: 0;
 }
 
 .search-bar {
@@ -40,7 +39,7 @@ body {
 }
 
 .filter-header {
-  padding: 12px 16px;
+  padding: 4px 16px;
   padding-bottom: 0;
   min-width: 160px;
 }
@@ -84,11 +83,14 @@ body {
   display: block;
 }
 
+/* .user-name {
+  color: #7A9D6F;
+} */
+
 .title-logo {
   height: 14vmin;
   width: 70vmin;
   padding: 10vmin;
-  cursor: pointer;
 }
 
 /* ALL RECIPE CARD CLASSES */
@@ -109,7 +111,7 @@ body {
   position: relative;
 }
 
-.recipe-card:hover {
+.pointer {
   cursor: pointer;
 }
 
@@ -147,33 +149,53 @@ h3 {
 }
 
 .recipe-popup {
-  height: 80vmin;
-  width: 70vmin;
+  height: 70vmin;
+  width: 80vmin;
   border: 2px white solid;
   border-radius: 5px;
   background-color: #E1E1E1;
-  margin: 3vmin;
+  margin-top: 3vmin;
   overflow: auto;
-  padding: 1vmin;
+  padding: 3vmin;
+  padding-right: 5vmin;
+}
+
+.modal-img {
+  height: 40vmin;
+  width: 45vmin;
+  border-radius: 5px;
+  filter: drop-shadow(3px 3px 3px black);
 }
 
 .save-button {
   font-family: inherit;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
 }
 
-.image-ingredients{
+.save-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.image-ingredients {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.ingredient-list{
+/* .ingredient-list{
   text-align: left;
-}
+} */
 
 li {
   text-align: left;
   margin-bottom: 0.4vmin;
+}
+
+.oregano-font {
+  font-family: 'Oregano', cursive;
 }
 
 .hidden {
