@@ -19,8 +19,7 @@ body {
 }
 
 .nav-logo {
-  width: 5vmin;
-  min-width: 160px;
+  width: 20vmin;
   align-self: center;
   padding-left: 2%;
 }
@@ -44,8 +43,8 @@ body {
 
 .filter-header {
   text-align: center;
+  padding: 1vmin 2vmin;
   padding-bottom: 0;
-  min-width: 160px;
 }
 
 .dropdown {
@@ -66,15 +65,13 @@ body {
   display: none;
   position: absolute;
   background-color: #FFFFFF;
-  min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
 }
 
 .dropdown-content li {
   float: none;
   color: black;
-  padding: 12px 16px;
+  padding: 1.5vmin;
   display: block;
   text-align: left;
 }
@@ -88,15 +85,13 @@ body {
 }
 
 .title-logo {
-  height: 14vmin;
-  width: 80vmin;
-  padding: 10vmin;
+  width: 110vmin;
+  padding: 15vmin;
 }
 
 .user-icon {
   padding-right: 1%;
   width: 4vmin;
-  min-width: 30px;
 }
 
 .user-name {
@@ -107,9 +102,11 @@ body {
 
 .user-text {
   text-align: center;
-  width: 30vmin;
+  padding: 0 1.5vmin;
   background-color: black;
   border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* ALL RECIPE CARD CLASSES */
@@ -128,10 +125,10 @@ body {
   margin: 3vmin;
   position: relative;
 }
+
 .recipe-card:hover {
   transform: translate(-5px, -5px);
   box-shadow: 10px 10px 10px #888888;
-  /* transform: translateX(-5px); */
 }
 
 .pointer {
@@ -153,13 +150,10 @@ body {
   top: 0.7vmin;
 }
 
-
-/* Let's make this more specific or lumped into something else */
 .recipe-title {
   position: relative;
   top: -1vmin;
   margin: 0vmin;
-  /* font-size: 2.8rem; */
 }
 
 /* ALL MODAL/POP-UP RECIPE CLASSES */
@@ -168,6 +162,7 @@ body {
   justify-content: center;
   align-items: center;
   top: 0;
+  left: 0;
   background-color: rgba(0 0 0 / 80%);
   height: 100%;
   width: 100%;
@@ -191,7 +186,6 @@ body {
 .close-icon {
   float: right;
   width: 3vmin;
-  min-width: 10px;
 }
 
 .modal-img {
@@ -219,10 +213,6 @@ body {
   align-items: center;
 }
 
-/* .ingredient-list{
-  text-align: left;
-} */
-
 li {
   text-align: left;
   margin-bottom: 0.4vmin;
@@ -233,9 +223,8 @@ li {
 }
 
 .footer-logo {
-  height: 14vmin;
-  width: 80vmin;
-  padding: 10vmin;
+  width: 60vmin;
+  padding: 15vmin;
 }
 
 .hidden {

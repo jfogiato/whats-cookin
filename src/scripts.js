@@ -11,10 +11,13 @@ import User from './classes/User';
 // global variables
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
+const filterHeader = document.getElementById('filterHeader')
 const filterDropdown = document.getElementById('filterDropdown');
 const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
+const titleLogo = document.getElementById('titleLogo');
+const myRecipesTitle = document.getElementById('myRecipesTitle');
 const logo = document.getElementById('logo');
 const body = document.querySelector('body');
 let users;
@@ -136,20 +139,29 @@ function updateButtonText() {
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
+  myRecipesTitle.innerText = `What's Cookin' in ${currentUser.name}'s Kitchen?`;
   navUserInfo.innerHTML = `
   <img class="user-icon" src="./images/user.png" alt="user icon">
-  <span class="user-text style="font-size: 1rem">${currentUser.name}</span>
+  <span class="user-text">${currentUser.name}</span>
   `;
 }
 
 function showSavedRecipes() {
   savedView = true;
   currentView = currentUser.savedRecipes;
+  searchBar.placeholder = 'Search My Recipes...';
+  filterHeader.innerText = 'Filter My Recipes';
+  toggleHidden(myRecipesTitle);
+  toggleHidden(titleLogo);
   createRecipeCards(currentView);
 }
 
 function goHome() {
+  toggleHidden(myRecipesTitle);
+  toggleHidden(titleLogo);
   savedView = false;
   currentView = recipeRepo.recipes;
+  searchBar.placeholder = 'Search Recipes...';
+  filterHeader.innerText = 'Filter Recipes';
   createRecipeCards(currentView);
 }
