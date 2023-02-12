@@ -30,7 +30,7 @@ body {
   list-style: none;
   align-items: flex-end;
   justify-content: space-between;
-  width: 60%;
+  width: 70%;
   padding-right: 4vmin;
 }
 
@@ -43,7 +43,7 @@ body {
 }
 
 .filter-header {
-  padding: 4px 16px;
+  text-align: center;
   padding-bottom: 0;
   min-width: 160px;
 }
@@ -66,7 +66,7 @@ body {
   display: none;
   position: absolute;
   background-color: #FFFFFF;
-  min-width: 160px;
+  min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -91,6 +91,25 @@ body {
   height: 14vmin;
   width: 80vmin;
   padding: 10vmin;
+}
+
+.user-icon {
+  padding-right: 1%;
+  width: 4vmin;
+  min-width: 30px;
+}
+
+.user-name {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.user-text {
+  text-align: center;
+  width: 30vmin;
+  background-color: black;
+  border-radius: 10px;
 }
 
 /* ALL RECIPE CARD CLASSES */
@@ -123,28 +142,17 @@ body {
   padding-top: 3%;
   height: 35vmin;
   width: 42vmin;
-  filter: drop-shadow(0px 5px 8px #888888)
+  border-radius: 4%;
+  filter: drop-shadow(0px 5px 8px #888888);
 }
 
 .heart-icon {
-  height: 10vmin;
-  width: 6vmin;
+  width: 10vmin;
   position: absolute;
   right: 0.7vmin;
-  top: 0.7vmin
+  top: 0.7vmin;
 }
 
-.user-icon {
-  padding-right: 10px;
-  width: 4vmin;
-  min-width: 30px;
-}
-
-.user-name {
-  display: flex;
-  align-items: center;
-  color: gray
-}
 
 /* Let's make this more specific or lumped into something else */
 .recipe-title {
@@ -178,6 +186,12 @@ body {
   overflow: auto;
   padding: 3vmin;
   padding-right: 5vmin;
+}
+
+.close-icon {
+  float: right;
+  width: 3vmin;
+  min-width: 10px;
 }
 
 .modal-img {

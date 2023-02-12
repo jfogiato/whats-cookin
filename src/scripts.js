@@ -4,6 +4,7 @@ import './images/heart.png';
 import './images/user.png';
 import './images/wc-logo.png';
 import './images/home-button.png';
+import './images/close-icon.png';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 
@@ -69,6 +70,7 @@ function createRecipeModal(event) {
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
     <div class="recipe-popup">
+        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
         <h2>${modalRecipe.name}</h2>
         <div class="image-ingredients">
         <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
@@ -102,7 +104,7 @@ function toggleHidden(element) {
 function collapseRecipe(event) {
   body.classList.remove('no-scroll')
   createRecipeCards(currentView);
-  if (event.target.id === "recipeModalBackground"){
+  if (event.target.id === "recipeModalBackground" || event.target.id === "closeIcon"){
     toggleHidden(modalSection);
   }
 }
@@ -136,7 +138,7 @@ function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
   navUserInfo.innerHTML = `
   <img class="user-icon" src="./images/user.png" alt="user icon">
-  <span style="font-size: 1rem">${currentUser.name}</span>
+  <span class="user-text style="font-size: 1rem">${currentUser.name}</span>
   `;
 }
 
