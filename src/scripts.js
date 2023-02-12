@@ -103,6 +103,7 @@ function toggleHidden(element) {
 
 function collapseRecipe(event) {
   createRecipeCards(currentView);
+  document.body.style.overflowY = "visible";
   if (event.target.id === "recipeModalBackground") {
     toggleHidden(modalSection);
   }
