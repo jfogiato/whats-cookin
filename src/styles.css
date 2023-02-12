@@ -103,7 +103,6 @@ body {
 .recipe-card {
   height: 50vmin;
   width: 45vmin;
-  border: 2px black solid;
   border-radius: 5px;
   box-shadow: 5px 5px 10px #888888;
   background-color: #E1E1E1;
@@ -121,8 +120,9 @@ body {
 }
 
 .recipe-img {
+  padding-top: 3%;
   height: 35vmin;
-  width: 45vmin;
+  width: 42vmin;
 }
 
 .heart-icon {
