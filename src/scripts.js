@@ -1,6 +1,7 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 import './images/heart.png';
+import './images/user.png';
 import './images/wc-logo.png';
 import './images/home-button.png';
 import RecipeRepository from './classes/RecipeRepository';
@@ -133,7 +134,7 @@ function updateButtonText() {
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
-  navUserInfo.innerHTML = `<span style="font-size: 1.3rem">👤</span>  ${currentUser.name}`;
+  navUserInfo.innerHTML = `<span style="font-size: 1rem">${currentUser.name}</span>`;
 }
 
 function showSavedRecipes() {

@@ -83,10 +83,6 @@ body {
   display: block;
 }
 
-/* .user-name {
-  color: #7A9D6F;
-} */
-
 .title-logo {
   height: 14vmin;
   width: 80vmin;
@@ -120,7 +116,6 @@ body {
 }
 
 .recipe-img {
-  border-radius: 10%;
   padding-top: 3%;
   height: 35vmin;
   width: 42vmin;
@@ -134,6 +129,24 @@ body {
   right: 0.7vmin;
   top: 0.7vmin
 }
+
+.user-icon {
+  height: 4vmin;
+  width: 4vmin;
+}
+
+.user-info {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  color: black;
+  text-align: right;
+}
+
 
 /* Let's make this more specific or lumped into something else */
 .recipe-title {
