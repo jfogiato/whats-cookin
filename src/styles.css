@@ -120,9 +120,11 @@ body {
 }
 
 .recipe-img {
+  border-radius: 10%;
   padding-top: 3%;
   height: 35vmin;
   width: 42vmin;
+  filter: drop-shadow(0px 5px 8px #888888)
 }
 
 .heart-icon {
