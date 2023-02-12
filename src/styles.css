@@ -19,23 +19,27 @@ body {
 }
 
 .nav-logo {
-  height: 7vmin;
-  width: 20vmin;
-  padding: 1vmin 3vmin;
+  width: 5vmin;
+  min-width: 160px;
+  align-self: center;
+  padding-left: 2%;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  width: 60%;
+  list-style: none;
   align-items: flex-end;
   justify-content: space-between;
+  width: 60%;
   padding-right: 4vmin;
-  margin-top: 0;
 }
 
 .search-bar {
   font-family: inherit;
+  font-size: 1rem;
+  border: 2px solid black; 
+  border-radius: 10px;
+  padding-left: 5vmin;
 }
 
 .filter-header {
@@ -123,7 +127,7 @@ body {
 }
 
 .heart-icon {
-  height: 6vmin;
+  height: 10vmin;
   width: 6vmin;
   position: absolute;
   right: 0.7vmin;
@@ -131,22 +135,16 @@ body {
 }
 
 .user-icon {
-  height: 4vmin;
+  padding-right: 10px;
   width: 4vmin;
-}
-
-.user-info {
-  height: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 30px;
 }
 
 .user-name {
-  color: black;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  color: gray
 }
-
 
 /* Let's make this more specific or lumped into something else */
 .recipe-title {

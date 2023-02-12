@@ -134,7 +134,10 @@ function updateButtonText() {
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
-  navUserInfo.innerHTML = `<span style="font-size: 1rem">${currentUser.name}</span>`;
+  navUserInfo.innerHTML = `
+  <img class="user-icon" src="./images/user.png" alt="user icon">
+  <span style="font-size: 1rem">${currentUser.name}</span>
+  `;
 }
 
 function showSavedRecipes() {
