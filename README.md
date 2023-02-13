@@ -1,16 +1,63 @@
-# What's Cookin'? Starter Kit
+# What's Cookin'
 
-The details of this project are outlined in the <a href="https://frontend.turing.edu/projects/What%27sCookin-PartOne.html" target="\__blank">project spec</a>.
+## Abstract:
+[//]: <>
+We built an application that has a variety of recipes for users to choose from. The recipes, ingredients, and randomly selected users were generated from three different data sets which we imported using Fetch API. The user can scroll through these recipes, search by keyword, or filter by category. Clicking on a single recipe displays the instructions, ingredients, and total cost, and allows the user to save the recipe to their "My Recipe" section. Once in the "My Recipe" section, the user can also filter and search within their saved recipes.
 
-## Set Up
+## Installation Instructions:
+[//]: <>
+1. Fork and clone [this repo](https://github.com/jfogiato/whats-cookin)
+1. Copy the SSH key from the green "Code" button within the repo.
+1. In your terminal, use the command `git clone git@github.com:[the link to your repo]`.
+1. Run `npm install`.
+1. Do NOT run `npm audit fix --force` when prompted.
+1. Open the repo in your text editor to make any changes or inspect code.
+1. Run `npm start`.
+1. Copy and paste the generated `localServer` address that your terminal provides into your browser address bar.
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button.
-2. All group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run npm start in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page). `Control + C` is the command to stop running the local server. Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.
-5. Make sure both members of your team are collaborators on the forked repo.
-6. Do not run `npm audit fix --force`. This will update to the latest version of packages. We need to be using `webpack-dev-server@3.11.2` which is not the latest version. If you start to run into Webpack errors, first check that all group members are using the correct version.
+## Preview of App:
+[//]: <>
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/57634618/218500788-24909f32-a4f9-4a1c-8d41-f57e7f816ed4.gif)
 
-## Testing
+## Context:
+[//]: <>
+We were assigned this project on Friday, February 3rd and had until Monday, February 13th to complete the project. We spent 3-5 hours a day either individually, paired or as a group (for a total of 28 hours), and had the majority of the project completed by Saturday. We are in our 3rd week of Mod 2 at Turing.
 
-Mocha and chai are already set up, with a boilerplate test for you.
+## Contributors:
+[//]: <>
+- [Joseph 'Joe' Fogiato](https://github.com/jfogiato)
+- [Jeffrey 'Jeff' Sahim](https://github.com/jsahim)
+- [Christopher 'Chris' Baum](https://github.com/qrispi)
+- [Thomas 'Tom' Doder](https://github.com/LordSchwifty)
+
+## Learning Goals:
+[//]: <>
+1. Implement ES6 classes that communicate to each other as needed.
+1. Use object and array prototype methods to perform data manipulation.
+1. Create a user interface that is easy to use and clearly displays information.
+1. Write modular, reusable code that follows SRP (Single Responsibility Principle).
+1. Implement a robust testing suite using TDD.
+1. Make network requests to retrieve data.
+
+## Technologies Used:
+[//]: <>
+- Fetch API
+- Webpack
+- Mocha & Chai
+- LightHouse
+- Wave Evaluation
+- GitHub Issues & Project Board
+- JavaScript
+- CSS
+- HTML
+
+## Wins + Challenges:
+[//]: <>
+- Wins:
+  - Using APIs was a new concept and the team did a great job of researching and then utilizing this concept on the web app. We successfully fetched, parsed and displayed data from 3 separate URL sources.
+  - Utilized Git and GitHub workflow to create branches and maintain seamless asynchronous workflow with no merge conflicts due in part to our communication.
+  - Leveraged GitHub Projects & Issues tools to manage workflow and expectations for project scope, bug resolution and feature enhancements.
+  - We creatively designed and implemented our own verison of a Micromodal UI feature.
+- Challenges:
+  - We were able to circumnavigate an issue with getting our Recipe Title to constrain its size within the give text area based on character length of each title.
+  - While implementing API data on the site was a win, it was also a challenge. Being a new concept we spent a lot of time figuring out how to access the data to make it usable in our code.
