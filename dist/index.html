@@ -2,28 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="../src/styles.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano&family=Rock+Salt&display=swap" rel="stylesheet">
     <title>What's Cookin'</title>
 </head>
 <body>
     <nav class="nav-bar">
-        <img class="logo" id="logo" src="./images/turing-logo.png" alt="Turing Logo placeholder">
+        <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home">
         <menu class="nav-links">
-            <input type="text" placeholder="Search Recipes.." id="searchBar">
-            <div class="dropdown">
-                <li class="dropbtn" >Filter Recipes</li>
+            <input type="text" placeholder="Search Recipes..." class="search-bar" id="searchBar">
+            <div class="dropdown pointer">
+                <li class="dropbtn filter-header" id="filterHeader">Filter Recipes</li>
                   <div class="dropdown-content" id="filterDropdown">
                     <li>Appetizer</li>
                     <li>Breakfast</li>
-                    <li>Dip</li>
                     <li>Main Course</li>
                     <li>Salad</li>
-                    <li>Sauce</li>
                     <li>Side Dish</li>
+                    <li>Dip</li>
+                    <li>Sauce</li>
                  </div>
             </div>
-            <li id="navMyRecipes">My Recipes</li>
-            <li id="navUserInfo">User Info</li>
+            <li id="navMyRecipes" class="pointer">My Recipes</li>
+            <li id="navUserInfo" class="user-name"></li>
         </menu>
     </nav>
     <main>
@@ -31,36 +33,14 @@
         <!-- Clicked recipe will be displayed here -->
       </section>
         <header>
-            <h1 class="title">What's Cookin'</h1>
-            <!-- The following is a header feature that may be incorporated later -->
-            <!-- <section class="featured-recipe">
-                <article class="featured-card">
-                    <img class="featured-img" src="src/images/cookies-placeholder.jpeg" alt="Cookies placeholder">
-                    <img class="star-icon hidden" id="star-icon" src="src/images/star-icon.png" alt="This recipe is in my recipes!">
-                    <h3>Loaded Chocolate Chip Pudding Cookie Cups</h3>
-                </article>
-                <div class="featured-directions">
-                    <h2>Not sure what to cook? Try out this delicious [insert tag name here] tonight! Or keep scrolling to see more tantalizing recipes.</h2>
-                    <ol class="hidden">
-                        <li>In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.</li>
-                        <li>Add egg and vanilla and mix until combined.</li>
-                        <li>Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.</li>
-                        <li>Place the cookie dough balls into ungreased muffin pan. Sprinkle with sea salt.</li>
-                        <li>Bake for 9 to 10 minutes, or until you see the edges start to brown.</li>
-                        <li>Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack.Top with ice cream and a drizzle of chocolate sauce.</li>
-                    </ol>
-                </div>
-            </section> -->
+            <img class="title-logo" id="titleLogo" src="./images/wc-logo.png" alt="What's Cookin' Title Logo/Take Me Home">
+            <h1 class="my-recipes-title hidden" id="myRecipesTitle"></h1>
         </header>
         <section class="all-recipes" id="allRecipes">
-
             <!-- Recipes and cards go here -->
         </section>
-        <section class="hidden" id="myRecipes">
-          <!-- Saved recipes and cards go here -->
-        </section>
         <footer>
-            <h4>Not finding what you're looking for? Try using the Search or Filter features to narrow it down!</h4>
+            <img class="footer-logo" src="./images/wc-logo.png" alt="What's Cookin' Footer Logo/Take Me Home">
         </footer>
     </main>
     <script src="bundle.js"></script>

@@ -1,18 +1,25 @@
 import './styles.css';
 import apiCalls from './apiCalls';
-import './images/turing-logo.png';
 import './images/heart.png';
+import './images/user.png';
+import './images/wc-logo.png';
+import './images/home-button.png';
+import './images/close-icon.png';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 
 // global variables
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
+const filterHeader = document.getElementById('filterHeader')
 const filterDropdown = document.getElementById('filterDropdown');
 const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
+const titleLogo = document.getElementById('titleLogo');
+const myRecipesTitle = document.getElementById('myRecipesTitle');
 const logo = document.getElementById('logo');
+const body = document.querySelector('body');
 let users;
 let ingredients;
 let recipes;
@@ -44,16 +51,16 @@ apiCalls().then(data => {
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
-        let size = (2 - (recipe.name.length / 65)).toFixed(2);
+        let size = (1.6 - (recipe.name.length / 85)).toFixed(2);
         let hidden = "heart-icon";
         if(!recipe.saved){
           hidden = "heart-icon hidden";
         }
         recipeSection.innerHTML += `
-        <article class="recipe-card" data-parent="${recipe.id}">
+        <article class="recipe-card pointer" data-parent="${recipe.id}">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
             <img class="${hidden}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
-            <h3 style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
+            <h3 class="recipe-title" style="font-size: ${size}rem" data-parent="${recipe.id}">${recipe.name}</h3>
         </article>`;
     });
 }
@@ -61,24 +68,26 @@ function createRecipeCards(recipes) {
 function createRecipeModal(event) {
   if(event.target.className !== "all-recipes") {
     toggleHidden(modalSection);
+    body.classList.add('no-scroll')
     let recipeID = +(event.target.dataset.parent);
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
     <div class="recipe-popup">
+        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
         <h2>${modalRecipe.name}</h2>
         <div class="image-ingredients">
-        <img class="recipe-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
-        <ul class="ingredient-list">
+        <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
+        <ul class="oregano-font">
             <h3>Ingredients:</h3>
             ${createList(modalRecipe.listIngredients(ingredients))}
         </ul>
         </div>
-        <ol class="direction-list">
+        <ol class="oregano-font">
         <h3>Directions:</h3>
         ${createList(modalRecipe.getInstructions())}
         </ol>
-        <h4>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</h4>
-        <button class="save-button" id="saveBtn">${updateButtonText()}</button>
+        <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
+        <button class="save-button pointer" id="saveBtn">${updateButtonText()}</button>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
   }
@@ -96,8 +105,9 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
+  body.classList.remove('no-scroll')
   createRecipeCards(currentView);
-  if (event.target.id === "recipeModalBackground"){
+  if (event.target.id === "recipeModalBackground" || event.target.id === "closeIcon"){
     toggleHidden(modalSection);
   }
 }
@@ -129,17 +139,29 @@ function updateButtonText() {
 
 function getRandomUser() {
   currentUser = new User(users[Math.floor(Math.random() * users.length)]);
-  navUserInfo.innerText = currentUser.name;
+  myRecipesTitle.innerText = `What's Cookin' in ${currentUser.name}'s Kitchen?`;
+  navUserInfo.innerHTML = `
+  <img class="user-icon" src="./images/user.png" alt="user icon">
+  <span class="user-text">${currentUser.name}</span>
+  `;
 }
 
 function showSavedRecipes() {
   savedView = true;
   currentView = currentUser.savedRecipes;
+  searchBar.placeholder = 'Search My Recipes...';
+  filterHeader.innerText = 'Filter My Recipes';
+  toggleHidden(myRecipesTitle);
+  toggleHidden(titleLogo);
   createRecipeCards(currentView);
 }
 
 function goHome() {
+  toggleHidden(myRecipesTitle);
+  toggleHidden(titleLogo);
   savedView = false;
   currentView = recipeRepo.recipes;
+  searchBar.placeholder = 'Search Recipes...';
+  filterHeader.innerText = 'Filter Recipes';
   createRecipeCards(currentView);
 }
