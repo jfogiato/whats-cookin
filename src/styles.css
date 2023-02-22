@@ -117,7 +117,7 @@ body {
 }
 
 .recipe-card {
-  height: 50vmin;
+  height: 46vmin;
   width: 45vmin;
   border-radius: 5px;
   box-shadow: 5px 5px 10px #888888;
@@ -152,8 +152,24 @@ body {
 
 .recipe-title {
   position: relative;
-  top: -1vmin;
-  margin: 0vmin;
+  top: -4vmin;
+  margin: 0;
+  padding: 3vmin;
+  font-size: 1.6rem;
+  width: 40vmin;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.long-title:hover {
+  background-color: #E1E1E1;
+  box-shadow: 10px 10px 13px #888888;
+  padding: 0 2.5vmin;
+  height: auto;
+  white-space: normal;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
 
 /* ALL MODAL/POP-UP RECIPE CLASSES */
@@ -233,4 +249,13 @@ li {
 
 .no-scroll {
   overflow: hidden;
+}
+
+.off-page {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
