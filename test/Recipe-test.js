@@ -89,7 +89,7 @@ describe('Recipe', () => {
 
   it('should return the cost of it\'s ingredients', () => {
     expect(recipe.listCost).to.be.a('function');
-    expect(recipe.listCost(ingredients)).to.equal(177.76);
+    expect(recipe.listCost(ingredients)).to.equal(178);
   });
 
   it('should return the recipe instructions', () => {

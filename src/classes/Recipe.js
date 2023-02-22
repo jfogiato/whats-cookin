@@ -15,15 +15,15 @@ class Recipe {
       return recipeIds.includes(ingredient.id);
     });
     
-    const ingredientsWithAllData = this.ingredients.reduce((acc, cv) => {
-      const combiner = relevantIngredients.forEach(el => {
-        if(el.id === cv.id) {
+    const ingredientsWithAllData = this.ingredients.reduce((acc, recipeIngredient) => {
+      const combiner = relevantIngredients.forEach(ingredientItem => {
+        if(ingredientItem.id === recipeIngredient.id) {
           acc.push(
           {
-            id: el.id,
-            name: el.name,
-            estimatedCostInCents: el.estimatedCostInCents,
-            quantity: cv.quantity
+            id: ingredientItem.id,
+            name: ingredientItem.name,
+            estimatedCostInCents: ingredientItem.estimatedCostInCents,
+            quantity: recipeIngredient.quantity
           });
         }
       });
@@ -34,18 +34,18 @@ class Recipe {
   }
   
   listIngredients(ingredientData) {
-    return this.matchIngredients(ingredientData).map(element => {
-      let amount = element.quantity.amount
+    return this.matchIngredients(ingredientData).map(ingredient => {
+      let amount = ingredient.quantity.amount
       if(amount.toString().length > 5) {
-        amount = element.quantity.amount.toFixed(2)
+        amount = ingredient.quantity.amount.toFixed(2)
       }
-      return `${amount} ${element.quantity.unit} ${element.name}`
+      return `${amount} ${ingredient.quantity.unit} ${ingredient.name}`
     });  
   }
 
   listCost(ingredientData) {
-    const totalCost = this.matchIngredients(ingredientData).reduce((acc, cv) => {
-      acc += (cv.estimatedCostInCents * cv.quantity.amount);
+    const totalCost = this.matchIngredients(ingredientData).reduce((acc, ingredient) => {
+      acc += (ingredient.estimatedCostInCents * ingredient.quantity.amount);
       return acc;
     }, 0);
     return Math.round(totalCost * .01);
