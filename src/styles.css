@@ -163,12 +163,12 @@ body {
 }
 
 .long-title:hover {
-  overflow-y: scroll;
   background-color: #E1E1E1;
   box-shadow: 10px 10px 13px #888888;
   padding: 0 2.5vmin;
-  height: 15vmin;
+  height: auto;
   white-space: normal;
+  font-size: 1.2rem;
   border-radius: 5px;
 }
 
