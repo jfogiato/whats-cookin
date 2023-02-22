@@ -57,7 +57,7 @@ function createRecipeCards(recipes) {
         if(!recipe.saved) heartClass = "heart-icon hidden";
         recipeSection.innerHTML += `
         <article class="recipe-card pointer" data-parent="${recipe.id}">
-            <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="picture of ${recipe.name}">
+            <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="Picture of ${recipe.name}">
             <img class="${heartClass}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h2 class="${titleClass}" data-parent="${recipe.id}">${recipe.name}</h2>
         </article>`;
