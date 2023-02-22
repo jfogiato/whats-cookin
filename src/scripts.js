@@ -157,11 +157,13 @@ function showSavedRecipes() {
 }
 
 function goHome() {
-  toggleHidden(myRecipesTitle);
-  toggleHidden(titleLogo);
-  savedView = false;
-  currentView = recipeRepo.recipes;
-  searchBar.placeholder = 'Search Recipes...';
-  filterHeader.innerText = 'Filter Recipes';
-  createRecipeCards(currentView);
+  if(currentView !== recipeRepo.recipes){
+    toggleHidden(myRecipesTitle);
+    toggleHidden(titleLogo);
+    savedView = false;
+    currentView = recipeRepo.recipes;
+    searchBar.placeholder = 'Search Recipes...';
+    filterHeader.innerText = 'Filter Recipes';
+    createRecipeCards(currentView);
+  }
 }
