@@ -2,27 +2,26 @@ class User {
   constructor(userData) {
     this.name = userData.name;
     this.id = userData.id;
-    this.pantry = userData.pantry;
-    this.savedRecipes = [];
+    this.recipesToCook = userData.recipesToCook;
   }
 
   toggleSaveRecipe(recipe) {
     if (recipe.saved) {
-      this.savedRecipes.forEach((element, index) => {
-        element.id === recipe.id ? this.savedRecipes.splice(index, 1) : null;
+      this.recipesToCook.forEach((element, index) => {
+        element.id === recipe.id ? this.recipesToCook.splice(index, 1) : null;
       });
     } else {
-      this.savedRecipes.unshift(recipe);
+      this.recipesToCook.unshift(recipe);
     }
     recipe.toggleSave();
   }
 
   filterSavedByTag(tag) {
-    return this.savedRecipes.filter(recipe => recipe.tags.includes(tag));
+    return this.recipesToCook.filter(recipe => recipe.tags.includes(tag));
   }
 
   filterSavedByName(name) {
-    return this.savedRecipes.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
+    return this.recipesToCook.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
   }
 
 }

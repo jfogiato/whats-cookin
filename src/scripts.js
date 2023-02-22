@@ -39,9 +39,9 @@ searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
 apiCalls().then(data => {
-  users = data[0].usersData;
-  ingredients = data[1].ingredientsData;
-  recipes = data[2].recipeData;
+  users = data[0];
+  ingredients = data[1];
+  recipes = data[2];
   recipeRepo = new RecipeRepository(recipes);
   currentView = recipeRepo.recipes;
   getRandomUser();
@@ -147,7 +147,7 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  currentView = currentUser.savedRecipes;
+  currentView = currentUser.recipesToCook;
   searchBar.placeholder = 'Search My Recipes...';
   filterHeader.innerText = 'Filter My Recipes';
   toggleHidden(myRecipesTitle);
