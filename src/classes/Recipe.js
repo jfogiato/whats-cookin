@@ -12,7 +12,6 @@ class Recipe {
   matchIngredients(ingredientData) {
     const relevantIngredients = ingredientData.filter(ingredient => {
       const recipeIds = this.ingredients.map(ingredient => ingredient.id);
-
       return recipeIds.includes(ingredient.id);
     });
     
@@ -28,7 +27,6 @@ class Recipe {
           });
         }
       });
-
       return acc;
     }, []);
 
@@ -41,7 +39,6 @@ class Recipe {
       if(amount.toString().length > 5) {
         amount = ingredient.quantity.amount.toFixed(2)
       }
-
       return `${amount} ${ingredient.quantity.unit} ${ingredient.name}`
     });  
   }
@@ -49,16 +46,13 @@ class Recipe {
   listCost(ingredientData) {
     const totalCost = this.matchIngredients(ingredientData).reduce((acc, ingredient) => {
       acc += (ingredient.estimatedCostInCents * ingredient.quantity.amount);
-
       return acc;
     }, 0);
-
     return Math.round(totalCost * .01);
   }
 
   getInstructions() {
     const instructions = this.instructions.map(step => `${step.instruction}`);
-    
     return instructions;
   }
 
