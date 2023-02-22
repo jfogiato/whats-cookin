@@ -56,7 +56,7 @@ function createRecipeCards(recipes) {
         let heartClass = "heart-icon";
         if(!recipe.saved) heartClass = "heart-icon hidden";
         recipeSection.innerHTML += `
-        <article class="recipe-card pointer" data-parent="${recipe.id}">
+        <article class="recipe-card pointer" data-parent="${recipe.id}" tabindex="0">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="Picture of ${recipe.name}">
             <img class="${heartClass}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h2 class="${titleClass}" data-parent="${recipe.id}">${recipe.name}</h2>
@@ -86,7 +86,7 @@ function createRecipeModal(event) {
         ${createList(modalRecipe.getInstructions())}
         </ol>
         <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
-        <button class="save-button pointer" id="saveBtn">${updateButtonText()}</button>
+        <button class="save-button pointer" id="saveBtn" tabindex="0">${updateButtonText()}</button>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
   }
