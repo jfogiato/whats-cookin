@@ -31,6 +31,7 @@ let currentView;
 
 //event listeners
 recipeSection.addEventListener('click', createRecipeModal);
+recipeSection.addEventListener('keypress', createRecipeModal);
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
 navMyRecipes.addEventListener('click', showSavedRecipes);
@@ -39,9 +40,9 @@ searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
 apiCalls().then(data => {
-  users = data[0].usersData;
-  ingredients = data[1].ingredientsData;
-  recipes = data[2].recipeData;
+  users = data[0].users;
+  ingredients = data[1].ingredients;
+  recipes = data[2].recipes;
   recipeRepo = new RecipeRepository(recipes);
   currentView = recipeRepo.recipes;
   getRandomUser();
@@ -65,14 +66,14 @@ function createRecipeCards(recipes) {
 }
 
 function createRecipeModal(event) {
-  if(event.target.className !== "all-recipes") {
+   if(event.target.className !== "all-recipes" || event.key === 'Enter') {
     toggleHidden(modalSection);
     body.classList.add('no-scroll')
     let recipeID = +(event.target.dataset.parent);
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
     <div class="recipe-popup">
-        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
+        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon" tabindex="0">
         <h2>${modalRecipe.name}</h2>
         <div class="image-ingredients">
         <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
@@ -88,9 +89,11 @@ function createRecipeModal(event) {
         <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
         <button class="save-button pointer" id="saveBtn" tabindex="0">${updateButtonText()}</button>
     </div>`;
+    document.querySelector('#closeIcon').focus()
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
   }
 }
+
 
 function createList(recipe) {
     return recipe.reduce((acc, cv) => {
