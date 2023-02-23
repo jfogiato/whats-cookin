@@ -265,3 +265,42 @@ li {
     height: 1px;
     overflow: hidden;
 }
+
+@media print {
+  .nav-bar, .all-recipes, .modal-img, .modal-button, .close-icon, h4 {
+    display: none;
+  }
+
+  .recipe-popup {
+    font-size: 1.2rem;
+    height: auto;
+    width: 100%;
+    border: none;
+    background-color: white;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .recipe-popup > h2 {
+    margin: 0;
+  }
+
+  .print-container {
+    font-size: 1.5rem;
+    display: flex;
+  }
+
+  .print-container > ul {
+    width: 35%;
+  }
+
+  .print-container > ol {
+    width: 65%;
+    margin-top: 0;
+  }
+}
+
+@page {
+  margin: 2cm;
+}
