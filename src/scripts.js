@@ -121,8 +121,13 @@ function filterRecipes(event) {
 function searchRecipes() {
   let keyword = searchBar.value;
   let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
-  currentView = searchedRecipes;
-  createRecipeCards(currentView);
+  if (searchedRecipes.length) {
+    currentView = searchedRecipes;
+    createRecipeCards(currentView);
+  } else {
+    recipeSection.innerHTML = "";
+    recipeSection.innerText = "Oh no - we don't have any recipes that match that search! Looks like you're going hungry tonight 🥲";
+  }
 }
 
 function toggleSaveRecipe() {
