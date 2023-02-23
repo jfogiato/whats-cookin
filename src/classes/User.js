@@ -23,7 +23,6 @@ class User {
   filterSavedByName(name) {
     return this.recipesToCook.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
   }
-
 }
 
 export default User;

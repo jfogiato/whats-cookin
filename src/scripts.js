@@ -1,5 +1,5 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+import apiObject from './apiCalls';
 import './images/heart.png';
 import './images/user.png';
 import './images/wc-logo.png';
@@ -38,7 +38,7 @@ logo.addEventListener('click', goHome);
 searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
-apiCalls().then(data => {
+apiObject.apiCalls().then(data => {
   users = data[0];
   ingredients = data[1];
   recipes = data[2];
