@@ -74,21 +74,27 @@ function createRecipeModal(event) {
     <div class="recipe-popup">
         <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
         <h2>${modalRecipe.name}</h2>
-        <div class="image-ingredients">
-        <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
-        <ul class="oregano-font">
-            <h3>Ingredients:</h3>
-            ${createList(modalRecipe.listIngredients(ingredients))}
-        </ul>
+        <div class="print-container">
+          <div class="image-ingredients">
+          <img class="modal-img" src="${modalRecipe.image}" alt="${modalRecipe.name} image">
+          <ul class="oregano-font">
+              <h3>Ingredients:</h3>
+              ${createList(modalRecipe.listIngredients(ingredients))}
+          </ul>
+          </div>
+          <ol class="oregano-font">
+            <h3>Directions:</h3>
+            ${createList(modalRecipe.getInstructions())}
+          </ol>
         </div>
-        <ol class="oregano-font">
-        <h3>Directions:</h3>
-        ${createList(modalRecipe.getInstructions())}
-        </ol>
-        <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
-        <button class="save-button pointer" id="saveBtn">${updateButtonText()}</button>
+        <h4 class="oregano-font"><i>TOTAL COST $${modalRecipe.listCost(ingredients)}</i></h4>
+        <div class="button-container">
+          <button class="modal-button pointer" id="saveBtn">${updateButtonText()}</button>
+          <button class="modal-button pointer" id="printBtn">Print Me!</button>
+        </div>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
   }
 }
 
