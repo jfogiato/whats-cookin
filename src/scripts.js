@@ -86,7 +86,10 @@ function createRecipeModal(event) {
         ${createList(modalRecipe.getInstructions())}
         </ol>
         <h4 class="oregano-font"><i>TOTAL COST $${+(modalRecipe.listCost(ingredients))}</i></h4>
-        <button class="save-button pointer" id="saveBtn">${updateButtonText()}</button>
+        <div class="button-container">
+          <button class="modal-button pointer" id="saveBtn">${updateButtonText()}</button>
+          <button class="modal-button pointer" id="printBtn">Print Me!</button>
+        </div>
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
   }
