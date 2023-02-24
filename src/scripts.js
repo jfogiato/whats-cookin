@@ -1,5 +1,5 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+import apiObject from './apiCalls';
 import './images/heart.png';
 import './images/user.png';
 import './images/wc-logo.png';
@@ -38,15 +38,21 @@ logo.addEventListener('click', goHome);
 searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
-apiCalls().then(data => {
-  users = data[0].usersData;
-  ingredients = data[1].ingredientsData;
-  recipes = data[2].recipeData;
+apiObject.getAllPromises().then(data => {
+  users = data[0];
+  ingredients = data[1];
+  recipes = data[2];
   recipeRepo = new RecipeRepository(recipes);
-  currentView = recipeRepo.recipes;
   getRandomUser();
+  recipeRepo.recipes.forEach(recipe => {
+    if(currentUser.recipesToCook.includes(recipe.id)) {
+      recipe.toggleSave();
+    }
+  });
+  currentView = recipeRepo.recipes;
   createRecipeCards(currentView);
 });
+
 
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
@@ -137,7 +143,13 @@ function searchRecipes() {
 }
 
 function toggleSaveRecipe() {
-  currentUser.toggleSaveRecipe(modalRecipe);
+  if(!modalRecipe.saved){
+    apiObject.apiRequest("usersRecipes","POST", currentUser, modalRecipe);
+  } else {
+    apiObject.apiRequest("usersRecipes","DELETE", currentUser, modalRecipe);
+  }
+  modalRecipe.toggleSave();
+  apiObject.apiRequest("users").then(data => currentUser.recipesToCook = data[0].recipesToCook);
   saveBtn.innerText = updateButtonText();
 }
 
@@ -148,7 +160,8 @@ function updateButtonText() {
 }
 
 function getRandomUser() {
-  currentUser = new User(users[Math.floor(Math.random() * users.length)]);
+  // currentUser = new User(users[Math.floor(Math.random() * users.length)]);
+  currentUser = new User(users[0]);
   myRecipesTitle.innerText = `What's Cookin' in ${currentUser.name}'s Kitchen?`;
   navUserInfo.innerHTML = `
   <img class="user-icon" src="./images/user.png" alt="user icon">
@@ -158,7 +171,10 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  currentView = currentUser.savedRecipes;
+  const savedRecipes = currentUser.recipesToCook.map(userRecipe => {
+    return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
+  });
+  currentView = savedRecipes;
   searchBar.placeholder = 'Search My Recipes...';
   filterHeader.innerText = 'Filter My Recipes';
   toggleHidden(myRecipesTitle);
