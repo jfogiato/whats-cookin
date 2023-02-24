@@ -1,62 +1,24 @@
-//GET DATA
-
-function getData(data) {
-    return fetch(`http://localhost:3001/api/v1/${data}`)
+function apiRequest(path, request, user, recipe) {
+    return fetch(`http://localhost:3001/api/v1/${path}`, {
+        method: request ? request : "GET",
+        body: user ? JSON.stringify({ userID: user.id, recipeID: recipe.id }) : null,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     .then(response => {
         if(!response.ok) {
             throw new Error("There was an error. Status Code: ", response.status);
         } else {
-            return response.json();
+            return response.json()
         }
     })
     .catch(error => console.log(`Could not fetch because: ${error}`));
 };
 
 const getAllPromises = () => {
-    return Promise.all([getData('users'), getData('ingredients'), getData('recipes')]);
+    return Promise.all([apiRequest("users"), apiRequest("ingredients"), apiRequest("recipes")]);
 };
 
-//POST DATA
-
-function postData(user, recipe) {
-    return fetch("http://localhost:3001/api/v1/usersRecipes", {
-        method: "POST",
-        body: JSON.stringify({ userID: user.id, recipeID: recipe.id }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => {
-        if(!response.ok) {
-            throw new Error("There was an error. Status Code: ", response.status);
-        } else {
-            return response.json()
-        }
-    })
-    .then(message => console.log(message))
-    .catch(error => console.log(`Could not fetch because: ${error}`));
-};
-
-// DELETE DATA
-
-function deleteData(user, recipe) {
-    return fetch("http://localhost:3001/api/v1/usersRecipes", {
-        method: "DELETE",
-        body: JSON.stringify({ userID: user.id, recipeID: recipe.id }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => {
-        if(!response.ok) {
-            throw new Error("There was an error. Status Code: ", response.status);
-        } else {
-            return response.json()
-        }
-    })
-    .then(message => console.log(message))
-    .catch(error => console.log(`Could not fetch because: ${error}`));
-};
-
-export default { getAllPromises, getData, postData, deleteData };
+export default { getAllPromises, apiRequest };
 

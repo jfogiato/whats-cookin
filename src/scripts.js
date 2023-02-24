@@ -128,12 +128,12 @@ function searchRecipes() {
 
 function toggleSaveRecipe() {
   if(!modalRecipe.saved){
-    apiObject.postData(currentUser, modalRecipe);
+    apiObject.apiRequest("usersRecipes","POST", currentUser, modalRecipe);
   } else {
-    apiObject.deleteData(currentUser, modalRecipe);
+    apiObject.apiRequest("usersRecipes","DELETE", currentUser, modalRecipe);
   }
   modalRecipe.toggleSave();
-  apiObject.getData("users").then(data => currentUser.recipesToCook = data[0].recipesToCook);
+  apiObject.apiRequest("users").then(data => currentUser.recipesToCook = data[0].recipesToCook);
   saveBtn.innerText = updateButtonText();
 }
 
