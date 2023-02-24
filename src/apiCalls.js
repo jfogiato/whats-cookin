@@ -30,11 +30,12 @@ function postData(user, recipe) {
         if(!response.ok) {
             throw new Error("There was an error. Status Code: ", response.status);
         } else {
-            console.log(response.json());
+            return response.json()
         }
     })
+    .then(message => console.log(message))
     .catch(error => console.log(`Could not fetch because: ${error}`));
 };
 
-export default { apiCalls, postData };
+export default { apiCalls, getData, postData };
 

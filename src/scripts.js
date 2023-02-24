@@ -48,6 +48,7 @@ apiObject.apiCalls().then(data => {
   createRecipeCards(currentView);
 });
 
+
 function createRecipeCards(recipes) {
     recipeSection.innerHTML = "";
     recipes.forEach(recipe => {
@@ -126,7 +127,12 @@ function searchRecipes() {
 }
 
 function toggleSaveRecipe() {
-  currentUser.toggleSaveRecipe(modalRecipe);
+  if(!modalRecipe.saved){
+    apiObject.postData(currentUser, modalRecipe);
+  }
+  //ADD OTHER CONDITONAL FOR DELETE RECIPE
+  // currentUser.toggleSaveRecipe(modalRecipe);
+  apiObject.getData("users").then(data => currentUser.recipesToCook = data[0].recipesToCook)
   saveBtn.innerText = updateButtonText();
 }
 
@@ -137,7 +143,8 @@ function updateButtonText() {
 }
 
 function getRandomUser() {
-  currentUser = new User(users[Math.floor(Math.random() * users.length)]);
+  // currentUser = new User(users[Math.floor(Math.random() * users.length)]);
+  currentUser = new User(users[0]);
   myRecipesTitle.innerText = `What's Cookin' in ${currentUser.name}'s Kitchen?`;
   navUserInfo.innerHTML = `
   <img class="user-icon" src="./images/user.png" alt="user icon">
@@ -147,7 +154,10 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  currentView = currentUser.recipesToCook;
+  const savedRecipes = currentUser.recipesToCook.map(userRecipe => {
+    return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
+  });
+  currentView = savedRecipes;
   searchBar.placeholder = 'Search My Recipes...';
   filterHeader.innerText = 'Filter My Recipes';
   toggleHidden(myRecipesTitle);
