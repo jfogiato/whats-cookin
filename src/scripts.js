@@ -35,6 +35,8 @@ recipeSection.addEventListener('keypress', createRecipeModal);
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
 navMyRecipes.addEventListener('click', showSavedRecipes);
+navMyRecipes.addEventListener('keypress', (event) => {
+    if(event.key === 'Enter') showSavedRecipes()});
 logo.addEventListener('click', goHome);
 searchBar.addEventListener('keyup', searchRecipes);
 
