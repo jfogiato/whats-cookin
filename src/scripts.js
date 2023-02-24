@@ -38,6 +38,7 @@ navMyRecipes.addEventListener('click', showSavedRecipes);
 navMyRecipes.addEventListener('keypress', (event) => {
     if(event.key === 'Enter') showSavedRecipes()});
 logo.addEventListener('click', goHome);
+logo.addEventListener('keypress', goHome);
 searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
