@@ -5,17 +5,6 @@ class User {
     this.recipesToCook = userData.recipesToCook;
   }
 
-  toggleSaveRecipe(recipe) {
-    if (recipe.saved) {
-      this.recipesToCook.forEach((element, index) => {
-        element.id === recipe.id ? this.recipesToCook.splice(index, 1) : null;
-      });
-    } else {
-      this.recipesToCook.unshift(recipe);
-    }
-    recipe.toggleSave();
-  }
-
   filterSavedByTag(tag) {
     return this.recipesToCook.filter(recipe => recipe.tags.includes(tag));
   }

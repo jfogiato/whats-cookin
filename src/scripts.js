@@ -43,8 +43,13 @@ apiObject.getAllPromises().then(data => {
   ingredients = data[1];
   recipes = data[2];
   recipeRepo = new RecipeRepository(recipes);
-  currentView = recipeRepo.recipes;
   getRandomUser();
+  recipeRepo.recipes.forEach(recipe => {
+    if(currentUser.recipesToCook.includes(recipe.id)) {
+      recipe.toggleSave();
+    }
+  });
+  currentView = recipeRepo.recipes;
   createRecipeCards(currentView);
 });
 
