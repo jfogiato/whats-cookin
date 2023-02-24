@@ -173,16 +173,18 @@ function getRandomUser() {
 }
 
 function showSavedRecipes() {
-  savedView = true;
-  const savedRecipes = currentUser.recipesToCook.map(userRecipe => {
-    return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
-  });
-  currentView = savedRecipes;
-  searchBar.placeholder = 'Search My Recipes...';
-  filterHeader.innerText = 'Filter My Recipes';
-  toggleHidden(myRecipesTitle);
-  toggleHidden(titleLogo);
-  createRecipeCards(currentView);
+  if(!savedView){
+    savedView = true;
+    const savedRecipes = currentUser.recipesToCook.map(userRecipe => {
+      return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
+    });
+    currentView = savedRecipes;
+    searchBar.placeholder = 'Search My Recipes...';
+    filterHeader.innerText = 'Filter My Recipes';
+    toggleHidden(myRecipesTitle);
+    toggleHidden(titleLogo);
+    createRecipeCards(currentView);
+  }
 }
 
 function goHome() {
