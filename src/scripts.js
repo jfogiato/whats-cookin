@@ -39,9 +39,9 @@ searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
 apiCalls().then(data => {
-  users = data[0].usersData;
-  ingredients = data[1].ingredientsData;
-  recipes = data[2].recipeData;
+  users = data[0].users;
+  ingredients = data[1].ingredients;
+  recipes = data[2].recipes;
   recipeRepo = new RecipeRepository(recipes);
   currentView = recipeRepo.recipes;
   getRandomUser();
@@ -71,8 +71,8 @@ function createRecipeModal(event) {
     let recipeID = +(event.target.dataset.parent);
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
-    <div class="recipe-popup">
-        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
+    <div class="recipe-popup" id="recipePopup">
+        <img role="button" aria-label="Close Recipe Button" class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" tabindex="0">
         <h2>${modalRecipe.name}</h2>
         <div class="print-container">
           <div class="image-ingredients">
@@ -95,6 +95,9 @@ function createRecipeModal(event) {
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
     document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('closeIcon').addEventListener('keypress', (event) => {
+      event.key === "Enter" ? collapseRecipe(event) : null
+    });
   }
 }
 
