@@ -31,10 +31,15 @@ let currentView;
 
 //event listeners
 recipeSection.addEventListener('click', createRecipeModal);
+recipeSection.addEventListener('keypress', createRecipeModal);
 modalSection.addEventListener('click', collapseRecipe);
 filterDropdown.addEventListener('click', filterRecipes);
 navMyRecipes.addEventListener('click', showSavedRecipes);
+navMyRecipes.addEventListener('keypress', (event) => {
+    if(event.key === 'Enter') showSavedRecipes()});
 logo.addEventListener('click', goHome);
+logo.addEventListener('keypress', (event) => {
+    if(event.key === 'Enter') goHome()});
 searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
@@ -62,7 +67,7 @@ function createRecipeCards(recipes) {
         let heartClass = "heart-icon";
         if(!recipe.saved) heartClass = "heart-icon hidden";
         recipeSection.innerHTML += `
-        <article class="recipe-card pointer" data-parent="${recipe.id}">
+        <article class="recipe-card pointer" data-parent="${recipe.id}" tabindex="0">
             <img class="recipe-img" src="${recipe.image}" data-parent="${recipe.id}" alt="Picture of ${recipe.name}">
             <img class="${heartClass}" data-parent="${recipe.id}" src="./images/heart.png" alt="This recipe is in my recipes!">
             <h2 class="${titleClass}" data-parent="${recipe.id}">${recipe.name}</h2>
@@ -71,7 +76,7 @@ function createRecipeCards(recipes) {
 }
 
 function createRecipeModal(event) {
-  if(event.target.className !== "all-recipes") {
+   if(event.target.className !== "all-recipes" || event.key === 'Enter') {
     toggleHidden(modalSection);
     body.classList.add('no-scroll')
     let recipeID = +(event.target.dataset.parent);
@@ -95,10 +100,11 @@ function createRecipeModal(event) {
         </div>
         <h4 class="oregano-font"><i>TOTAL COST $${modalRecipe.listCost(ingredients)}</i></h4>
         <div class="button-container">
-          <button class="modal-button pointer" id="saveBtn">${updateButtonText()}</button>
+          <button class="modal-button pointer" id="saveBtn" tabindex="0">${updateButtonText()}</button>
           <button class="modal-button pointer" id="printBtn">Print Me!</button>
         </div>
     </div>`;
+    document.querySelector('#closeIcon').focus()
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('closeIcon').addEventListener('keypress', (event) => {
@@ -106,6 +112,7 @@ function createRecipeModal(event) {
     });
   }
 }
+
 
 function createList(recipe) {
     return recipe.reduce((acc, cv) => {
@@ -173,14 +180,16 @@ function getRandomUser() {
 }
 
 function showSavedRecipes() {
-  savedView = true;
-  const savedRecipes = currentUser.convertToFullRecipe(recipeRepo)
-  currentView = savedRecipes;
-  searchBar.placeholder = 'Search My Recipes...';
-  filterHeader.innerText = 'Filter My Recipes';
-  toggleHidden(myRecipesTitle);
-  toggleHidden(titleLogo);
-  createRecipeCards(currentView);
+  if(!savedView){
+    savedView = true;
+    const savedRecipes = currentUser.convertToFullRecipe(recipeRepo)
+    currentView = savedRecipes;
+    searchBar.placeholder = 'Search My Recipes...';
+    filterHeader.innerText = 'Filter My Recipes';
+    toggleHidden(myRecipesTitle);
+    toggleHidden(titleLogo);
+    createRecipeCards(currentView);
+  }
 }
 
 function goHome() {
