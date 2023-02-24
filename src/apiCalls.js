@@ -12,7 +12,7 @@ function getData(data) {
     .catch(error => console.log(`Could not fetch because: ${error}`));
 };
 
-const apiCalls = () => {
+const getAllPromises = () => {
     return Promise.all([getData('users'), getData('ingredients'), getData('recipes')]);
 };
 
@@ -37,5 +37,26 @@ function postData(user, recipe) {
     .catch(error => console.log(`Could not fetch because: ${error}`));
 };
 
-export default { apiCalls, getData, postData };
+// DELETE DATA
+
+function deleteData(user, recipe) {
+    return fetch("http://localhost:3001/api/v1/usersRecipes", {
+        method: "DELETE",
+        body: JSON.stringify({ userID: user.id, recipeID: recipe.id }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if(!response.ok) {
+            throw new Error("There was an error. Status Code: ", response.status);
+        } else {
+            return response.json()
+        }
+    })
+    .then(message => console.log(message))
+    .catch(error => console.log(`Could not fetch because: ${error}`));
+};
+
+export default { getAllPromises, getData, postData, deleteData };
 

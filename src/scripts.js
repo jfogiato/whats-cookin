@@ -38,7 +38,7 @@ logo.addEventListener('click', goHome);
 searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
-apiObject.apiCalls().then(data => {
+apiObject.getAllPromises().then(data => {
   users = data[0];
   ingredients = data[1];
   recipes = data[2];
@@ -129,10 +129,11 @@ function searchRecipes() {
 function toggleSaveRecipe() {
   if(!modalRecipe.saved){
     apiObject.postData(currentUser, modalRecipe);
+  } else {
+    apiObject.deleteData(currentUser, modalRecipe);
   }
-  //ADD OTHER CONDITONAL FOR DELETE RECIPE
-  // currentUser.toggleSaveRecipe(modalRecipe);
-  apiObject.getData("users").then(data => currentUser.recipesToCook = data[0].recipesToCook)
+  modalRecipe.toggleSave();
+  apiObject.getData("users").then(data => currentUser.recipesToCook = data[0].recipesToCook);
   saveBtn.innerText = updateButtonText();
 }
 
