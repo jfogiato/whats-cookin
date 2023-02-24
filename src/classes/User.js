@@ -5,12 +5,18 @@ class User {
     this.recipesToCook = userData.recipesToCook;
   }
 
-  filterSavedByTag(tag) {
-    return this.recipesToCook.filter(recipe => recipe.tags.includes(tag));
+  convertToFullRecipe(recipeRepo) {
+    return this.recipesToCook.map(userRecipe => {
+      return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
+    });
   }
 
-  filterSavedByName(name) {
-    return this.recipesToCook.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
+  filterSavedByTag(tag, allRecipes) {
+    return this.convertToFullRecipe(allRecipes).filter(recipe => recipe.tags.includes(tag));
+  }
+
+  filterSavedByName(name, allRecipes) {
+    return this.convertToFullRecipe(allRecipes).filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
   }
 }
 
