@@ -78,7 +78,7 @@ function createRecipeModal(event) {
     modalRecipe = recipeRepo.recipes.find(recipe => recipe.id === recipeID);
     modalSection.innerHTML = `
     <div class="recipe-popup">
-        <img class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" alt="close icon">
+        <img role="button" aria-label="Close Recipe Button" class="close-icon pointer" id="closeIcon" src="./images/close-icon.png" tabindex="0">
         <h2>${modalRecipe.name}</h2>
         <div class="print-container">
           <div class="image-ingredients">
@@ -101,6 +101,9 @@ function createRecipeModal(event) {
     </div>`;
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
     document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('closeIcon').addEventListener('keypress', (event) => {
+      event.key === "Enter" ? collapseRecipe(event) : null
+    });
   }
 }
 
