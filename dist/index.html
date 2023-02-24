@@ -9,11 +9,11 @@
 </head>
 <body>
     <nav class="nav-bar">
-        <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home">
+        <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home" tabindex="0">
         <menu class="nav-links">
-            <label for="searchBar" class=".off-page">Search Recipes</label>
+            <label for="searchBar" class="off-page">Search Recipes</label>
             <input type="search" placeholder="Search Recipes..." class="search-bar" id="searchBar">
-            <div class="dropdown pointer">
+            <div class="dropdown pointer" tabindex="0">
                 <li class="dropbtn filter-header" id="filterHeader">Filter Recipes</li>
                   <div class="dropdown-content" id="filterDropdown">
                     <li>Appetizer</li>
@@ -25,7 +25,7 @@
                     <li>Sauce</li>
                  </div>
             </div>
-            <li id="navMyRecipes" class="pointer">My Recipes</li>
+            <li id="navMyRecipes" class="pointer" tabindex="0">My Recipes</li>
             <li id="navUserInfo" class="user-name"></li>
         </menu>
     </nav>
