@@ -128,14 +128,14 @@ function collapseRecipe(event) {
 
 function filterRecipes(event) {
     let tag = event.target.innerText.toLowerCase();
-    let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag) : recipeRepo.filterByTag(tag);
+    let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag, recipeRepo) : recipeRepo.filterByTag(tag);
     currentView = filteredRecipes;
     createRecipeCards(currentView);
 }
 
 function searchRecipes() {
   let keyword = searchBar.value;
-  let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword) : recipeRepo.filterByName(keyword);
+  let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword, recipeRepo) : recipeRepo.filterByName(keyword);
   if (searchedRecipes.length) {
     currentView = searchedRecipes;
     createRecipeCards(currentView);
@@ -174,9 +174,7 @@ function getRandomUser() {
 
 function showSavedRecipes() {
   savedView = true;
-  const savedRecipes = currentUser.recipesToCook.map(userRecipe => {
-    return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
-  });
+  const savedRecipes = currentUser.convertToFullRecipe(recipeRepo)
   currentView = savedRecipes;
   searchBar.placeholder = 'Search My Recipes...';
   filterHeader.innerText = 'Filter My Recipes';
