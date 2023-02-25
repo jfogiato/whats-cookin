@@ -44,9 +44,9 @@ searchBar.addEventListener('keyup', searchRecipes);
 
 //functions
 apiObject.getAllPromises().then(data => {
-  users = data[0];
-  ingredients = data[1];
-  recipes = data[2];
+  users = data[0].users;
+  ingredients = data[1].ingredients;
+  recipes = data[2].recipes;
   recipeRepo = new RecipeRepository(recipes);
   getRandomUser();
   recipeRepo.recipes.forEach(recipe => {
