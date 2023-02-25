@@ -49,17 +49,20 @@ body {
   font-family: inherit;
   border: none;
   border-bottom: 2px solid black;
-  height: 3vmin;
+  height: 40px;
+}
+
+.hover:hover {
+  border-bottom: 4px solid black;
+}
+
+.hover:focus {
+  border-bottom: 4px solid black;
 }
 
 form {
   display: flex;
   align-items: center;
-}
-
-select, option {
-  font-family: inherit;
-  background-color: white;
 }
 
 .my-recipes {
@@ -129,8 +132,8 @@ select, option {
 .heart-icon {
   width: 10vmin;
   position: absolute;
-  right: 0.7vmin;
-  top: 0.7vmin;
+  right: 2vmin;
+  top: 2vmin;
 }
 
 .recipe-title {
