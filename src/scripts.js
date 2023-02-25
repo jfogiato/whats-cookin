@@ -157,7 +157,9 @@ function toggleSaveRecipe() {
     apiObject.apiRequest("usersRecipes","DELETE", currentUser, modalRecipe);
   }
   modalRecipe.toggleSave();
-  apiObject.apiRequest("users").then(data => currentUser.recipesToCook = data[0].recipesToCook);
+  apiObject.apiRequest("users").then(data => {
+    console.log(data)
+    return currentUser.recipesToCook = data.users[0].recipesToCook});
   saveBtn.innerText = updateButtonText();
 }
 
