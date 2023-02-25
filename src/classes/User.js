@@ -6,9 +6,10 @@ class User {
   }
 
   convertToFullRecipe(recipeRepo) {
-    return this.recipesToCook.map(userRecipe => {
-      return recipeRepo.recipes.find(recipe => recipe.id === userRecipe)
+    const fullRecipes = this.recipesToCook.map(userRecipe => {
+      return recipeRepo.recipes.find(recipe => recipe.id === userRecipe);
     });
+    return fullRecipes.reverse();
   }
 
   filterSavedByTag(tag, allRecipes) {
