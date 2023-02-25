@@ -33,60 +33,46 @@ body {
   padding-right: 4vmin;
 }
 
-.search-bar {
+.input-bar {
   font-family: inherit;
   font-size: 1rem;
-  border: 2px solid black; 
-  border-radius: 10px;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 0 1vmin 0 1.5vmin;
+}
+
+.search-bar {
   padding-left: 5vmin;
 }
 
-.filter-header {
-  text-align: center;
-  padding: 1vmin 2vmin;
-  padding-bottom: 0;
-}
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  background-color: inherit;
+.filter-img {
   font-family: inherit;
+  border: none;
+  border-bottom: 2px solid black;
+  height: 40px;
 }
 
-.navbar li:hover, .dropdown:hover .dropbtn {
-  background-color: #E1E1E1;
+.hover:hover {
+  border-bottom: 4px solid black;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #FFFFFF;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+.hover:focus {
+  border-bottom: 4px solid black;
 }
 
-.dropdown-content li {
-  float: none;
-  color: black;
-  padding: 1.5vmin;
-  display: block;
-  text-align: left;
+form {
+  display: flex;
+  align-items: center;
 }
 
-.dropdown-content li:hover {
-  background-color: #E1E1E1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+.my-recipes {
+  border-bottom: 2px solid black;
+  padding: 0 2vmin;
+  margin: 0;
 }
 
 .title-logo {
-  width: 110vmin;
-  padding: 15vmin;
+  width: 90vmin;
 }
 
 .user-icon {
@@ -146,8 +132,8 @@ body {
 .heart-icon {
   width: 10vmin;
   position: absolute;
-  right: 0.7vmin;
-  top: 0.7vmin;
+  right: 2vmin;
+  top: 2vmin;
 }
 
 .recipe-title {
@@ -160,16 +146,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.long-title:hover {
-  background-color: #E1E1E1;
-  box-shadow: 10px 10px 13px #888888;
-  padding: 0 2.5vmin;
-  height: auto;
-  white-space: normal;
-  font-size: 1.2rem;
-  border-radius: 5px;
 }
 
 /* ALL MODAL/POP-UP RECIPE CLASSES */
