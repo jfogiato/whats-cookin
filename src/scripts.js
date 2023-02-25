@@ -1,5 +1,6 @@
 import './styles.css';
 import apiObject from './apiCalls';
+import './images/filter.png';
 import './images/heart.png';
 import './images/user.png';
 import './images/wc-logo.png';
@@ -11,8 +12,7 @@ import User from './classes/User';
 // global variables
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
-const filterHeader = document.getElementById('filterHeader')
-const filterDropdown = document.getElementById('filterDropdown');
+const filterSubmit = document.getElementById('filterSubmit');
 const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
 const navUserInfo = document.getElementById('navUserInfo');
@@ -33,7 +33,9 @@ let currentView;
 recipeSection.addEventListener('click', createRecipeModal);
 recipeSection.addEventListener('keypress', createRecipeModal);
 modalSection.addEventListener('click', collapseRecipe);
-filterDropdown.addEventListener('click', filterRecipes);
+filterSubmit.addEventListener('click', filterRecipes);
+filterSubmit.addEventListener('keypress', (event) => {
+  if(event.key === 'Enter') filterRecipes()});
 navMyRecipes.addEventListener('click', showSavedRecipes);
 navMyRecipes.addEventListener('keypress', (event) => {
     if(event.key === 'Enter') showSavedRecipes()});
@@ -106,8 +108,7 @@ function createRecipeModal(event) {
     document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
     document.getElementById('printBtn').addEventListener('click', () => window.print());
     document.getElementById('closeIcon').addEventListener('keypress', (event) => {
-      event.key === "Enter" ? collapseRecipe(event) : null
-    });
+      if(event.key === "Enter") collapseRecipe(event)});
   }
 }
 
@@ -124,18 +125,20 @@ function toggleHidden(element) {
 }
 
 function collapseRecipe(event) {
-  body.classList.remove('no-scroll')
+  body.classList.remove('no-scroll');
   createRecipeCards(currentView);
   if (event.target.id === "recipeModalBackground" || event.target.id === "closeIcon"){
     toggleHidden(modalSection);
   }
 }
 
-function filterRecipes(event) {
-    let tag = event.target.innerText.toLowerCase();
+function filterRecipes() {
+  const tag = document.getElementById('filters').value;
+  if(tag.length > 1) {
     let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag, recipeRepo) : recipeRepo.filterByTag(tag);
     currentView = filteredRecipes;
     createRecipeCards(currentView);
+  }
 }
 
 function searchRecipes() {
@@ -157,9 +160,7 @@ function toggleSaveRecipe() {
     apiObject.apiRequest("usersRecipes","DELETE", currentUser, modalRecipe);
   }
   modalRecipe.toggleSave();
-  apiObject.apiRequest("users").then(data => {
-    console.log(data)
-    return currentUser.recipesToCook = data.users[0].recipesToCook});
+  apiObject.apiRequest("users").then(data => currentUser.recipesToCook = data.users[0].recipesToCook);
   saveBtn.innerText = updateButtonText();
 }
 
@@ -185,7 +186,7 @@ function showSavedRecipes() {
     const savedRecipes = currentUser.convertToFullRecipe(recipeRepo)
     currentView = savedRecipes;
     searchBar.placeholder = 'Search My Recipes...';
-    filterHeader.innerText = 'Filter My Recipes';
+    document.getElementById('filterPlaceholder').innerText = 'Filter My Recipes';
     toggleHidden(myRecipesTitle);
     toggleHidden(titleLogo);
     createRecipeCards(currentView);
@@ -199,7 +200,7 @@ function goHome() {
     savedView = false;
     currentView = recipeRepo.recipes;
     searchBar.placeholder = 'Search Recipes...';
-    filterHeader.innerText = 'Filter Recipes';
+    document.getElementById('filterPlaceholder').innerText = 'Filter Recipes';
     createRecipeCards(currentView);
   }
 }

@@ -12,20 +12,22 @@
         <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home" tabindex="0">
         <menu class="nav-links">
             <label for="searchBar" class="off-page">Search Recipes</label>
-            <input type="search" placeholder="Search Recipes..." class="search-bar" id="searchBar">
-            <div class="dropdown pointer" tabindex="0">
-                <li class="dropbtn filter-header" id="filterHeader">Filter Recipes</li>
-                  <div class="dropdown-content" id="filterDropdown">
-                    <li>Appetizer</li>
-                    <li>Breakfast</li>
-                    <li>Main Course</li>
-                    <li>Salad</li>
-                    <li>Side Dish</li>
-                    <li>Dip</li>
-                    <li>Sauce</li>
-                 </div>
-            </div>
-            <li id="navMyRecipes" class="pointer" tabindex="0">My Recipes</li>
+            <input type="search" placeholder="Search Recipes..." class="input-bar search-bar" id="searchBar">
+            <form>
+                <label for="filters" class="off-page">Filter Recipes</label>
+                <select name="filter-recipes" id="filters" class="input-bar">
+                    <option id="filterPlaceholder" value="" disabled selected>Filter Recipes</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="main course">Main Course</option>
+                    <option value="salad">Salad</option>
+                    <option value="side dish">Side Dish</option>
+                    <option value="dip">Dip</option>
+                    <option value="sauce">Sauce</option>
+                </select>
+                <img class="filter-img pointer" id="filterSubmit" src="./images/filter.png" alt="filter recipe submit" tabindex="0">
+            </form>
+            <li id="navMyRecipes" class="my-recipes pointer" tabindex="0">My Recipes</li>
             <li id="navUserInfo" class="user-name"></li>
         </menu>
     </nav>
@@ -38,7 +40,7 @@
             <h1 class="my-recipes-title hidden" id="myRecipesTitle"></h1>
         </header>
         <section class="all-recipes" id="allRecipes">
-            <!-- Recipes and cards go here -->
+            <!-- Recipe cards go here -->
         </section>
         <footer>
             <img class="footer-logo" src="./images/wc-logo.png" alt="What's Cookin' Footer Logo/Take Me Home">
