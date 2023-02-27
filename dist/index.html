@@ -10,12 +10,14 @@
 <body>
     <nav class="nav-bar">
         <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home" tabindex="0">
-        <menu class="nav-links">
+        <img class="menu-icon" id="menuIcon" src="./images/hamburger-menu.png" alt="menu options" tabindex="0">
+        <img class="close-menu hidden" id="closeMenu" src="./images/close-menu.png" alt="close menu" tabindex="0">
+        <menu class="nav-links" id="navLinks">
             <label for="searchBar" class="off-page">Search Recipes</label>
             <input type="search" placeholder="Search Recipes..." class="input-bar search-bar hover" id="searchBar">
             <form>
                 <label for="filters" class="off-page">Filter Recipes</label>
-                <select name="filter-recipes" id="filters" class="input-bar pointer hover">
+                <select name="filter-recipes" id="filters" class="input-bar filter-select pointer hover">
                     <option id="filterPlaceholder" value="" disabled selected>Filter Recipes</option>
                     <option value="appetizer">Appetizer</option>
                     <option value="breakfast">Breakfast</option>
