@@ -6,12 +6,15 @@ import './images/user.png';
 import './images/wc-logo.png';
 import './images/home-button.png';
 import './images/close-icon.png';
+import './images/hamburger-menu.png';
+import './images/close-menu.png';
 import RecipeRepository from './classes/RecipeRepository';
 import User from './classes/User';
 
 // global variables
 const recipeSection = document.getElementById('allRecipes');
 const modalSection = document.getElementById('recipeModalBackground');
+const navLinks = document.getElementById('navLinks');
 const filterSubmit = document.getElementById('filterSubmit');
 const searchBar = document.getElementById('searchBar');
 const navMyRecipes = document.getElementById('navMyRecipes');
@@ -19,6 +22,9 @@ const navUserInfo = document.getElementById('navUserInfo');
 const titleLogo = document.getElementById('titleLogo');
 const myRecipesTitle = document.getElementById('myRecipesTitle');
 const logo = document.getElementById('logo');
+const mobileView = window.matchMedia('only screen and (max-device-width: 600px)')
+const menuIcon = document.getElementById('menuIcon');
+const closeMenu = document.getElementById('closeMenu');
 const body = document.querySelector('body');
 let users;
 let ingredients;
@@ -43,6 +49,8 @@ logo.addEventListener('click', goHome);
 logo.addEventListener('keypress', (event) => {
     if(event.key === 'Enter') goHome()});
 searchBar.addEventListener('keyup', searchRecipes);
+menuIcon.addEventListener('click', toggleMobileMenu);
+closeMenu.addEventListener('click', toggleMobileMenu);
 
 //functions
 apiObject.getAllPromises().then(data => {
@@ -58,6 +66,7 @@ apiObject.getAllPromises().then(data => {
     });
     currentView = recipeRepo.recipes;
     createRecipeCards(currentView);
+    if(mobileView.matches) navLinks.classList.add('hidden')
 });
 
 
@@ -205,5 +214,17 @@ function goHome() {
         searchBar.placeholder = 'Search Recipes...';
         document.getElementById('filterPlaceholder').innerText = 'Filter Recipes';
         createRecipeCards(currentView);
+    }
+}
+
+function toggleMobileMenu(e){
+    toggleHidden(navLinks);
+    toggleHidden(closeMenu);
+    toggleHidden(menuIcon);
+    if(e.target.id === "closeMenu"){
+        body.classList.remove('no-scroll');
+    }
+    if(e.target.id === "menuIcon"){
+        body.classList.add('no-scroll');
     }
 }
