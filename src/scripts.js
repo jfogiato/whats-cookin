@@ -138,27 +138,40 @@ function collapseRecipe(event) {
         body.classList.remove('no-scroll');
         createRecipeCards(currentView);
         toggleHidden(modalSection);
+        if(savedView && currentUser.recipesToCook.length < 1) {
+            recipeSection.innerHTML = "";
+            recipeSection.innerHTML = `<p class="sad-text">Oh no - you haven't saved any recipes! Looks like you're going hungry tonight 🥲</p>`;
+        }
     }
 }
 
 function filterRecipes() {
     const tag = document.getElementById('filters').value;
     if(tag.length > 1) {
+        window.scroll(0, 0);
         let filteredRecipes = savedView ? currentUser.filterSavedByTag(tag, recipeRepo) : recipeRepo.filterByTag(tag);
         currentView = filteredRecipes;
         createRecipeCards(currentView);
+        if (filteredRecipes.length < 1) {
+            recipeSection.innerHTML = "";
+            recipeSection.innerHTML = `<p class="sad-text">Oh no - you don't have any recipes that match that filter! 🥲 Go save some more recipes!</p>`;
+        }
     }
 }
 
 function searchRecipes() {
+    window.scroll(0, 0);
     let keyword = searchBar.value;
     let searchedRecipes = savedView ? currentUser.filterSavedByName(keyword, recipeRepo) : recipeRepo.filterByName(keyword);
     if(searchedRecipes.length) {
         currentView = searchedRecipes;
         createRecipeCards(currentView);
+    } else if (savedView) {
+        recipeSection.innerHTML = "";
+        recipeSection.innerHTML = `<p class="sad-text">Oh no - you don't have any recipes that match that search! 🥲 Go save some more recipes!</p>`;
     } else {
         recipeSection.innerHTML = "";
-        recipeSection.innerHTML = `<p class="sad-text">Oh no - we don't have any recipes that match that search! Looks like you're going hungry tonight 🥲</p>`;
+        recipeSection.innerHTML = `<p class="sad-text">Oh no - we don't have any recipes that match that search! 🥲 Try typing something else!</p>`;
     }
 }
 
@@ -208,13 +221,20 @@ function showSavedRecipes() {
 
 function goHome() {
     if(currentView !== recipeRepo.recipes) {
-        toggleHidden(myRecipesTitle);
-        toggleHidden(titleLogo);
-        savedView = false;
+        window.scroll(0, 0);
         currentView = recipeRepo.recipes;
+        searchBar.value = '';
         searchBar.placeholder = 'Search Recipes...';
+        document.getElementById('filters').value = '';
         document.getElementById('filterPlaceholder').innerText = 'Filter Recipes';
         createRecipeCards(currentView);
+        if(savedView) {
+            savedView = false;
+            toggleHidden(myRecipesTitle);
+            toggleHidden(titleLogo);
+        }
+    } else {
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 }
 
