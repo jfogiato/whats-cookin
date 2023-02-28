@@ -22,7 +22,7 @@ const navUserInfo = document.getElementById('navUserInfo');
 const titleLogo = document.getElementById('titleLogo');
 const myRecipesTitle = document.getElementById('myRecipesTitle');
 const logo = document.getElementById('logo');
-const mobileView = window.matchMedia('only screen and (max-device-width: 600px)')
+const mobileView = window.matchMedia('only screen and (max-device-width: 600px)');
 const menuIcon = document.getElementById('menuIcon');
 const closeMenu = document.getElementById('closeMenu');
 const body = document.querySelector('body');
@@ -66,7 +66,7 @@ apiObject.getAllPromises().then(data => {
     });
     currentView = recipeRepo.recipes;
     createRecipeCards(currentView);
-    if(mobileView.matches) navLinks.classList.add('hidden')
+    if(mobileView.matches) navLinks.classList.add('hidden');
 });
 
 
@@ -113,7 +113,7 @@ function createRecipeModal(event) {
                     <button class="modal-button pointer" id="printBtn">Print Me!</button>
                 </div>
         </div>`;
-        document.querySelector('#closeIcon').focus()
+        document.querySelector('#closeIcon').focus();
         document.getElementById('saveBtn').addEventListener('click', toggleSaveRecipe);
         document.getElementById('printBtn').addEventListener('click', () => window.print());
         document.getElementById('closeIcon').addEventListener('keypress', (event) => {
@@ -158,7 +158,7 @@ function searchRecipes() {
         createRecipeCards(currentView);
     } else {
         recipeSection.innerHTML = "";
-        recipeSection.innerText = "Oh no - we don't have any recipes that match that search! Looks like you're going hungry tonight 🥲";
+        recipeSection.innerHTML = `<p class="sad-text">Oh no - we don't have any recipes that match that search! Looks like you're going hungry tonight 🥲</p>`;
     }
 }
 
@@ -189,19 +189,20 @@ function getRandomUser() {
 }
 
 function showSavedRecipes() {
+    window.scroll(0, 0);
+    const savedRecipes = currentUser.convertToFullRecipe(recipeRepo);
+    currentView = savedRecipes;
+    searchBar.placeholder = 'Search My Recipes...';
+    document.getElementById('filterPlaceholder').innerText = 'Filter My Recipes';
+    createRecipeCards(currentView);
+    if(currentUser.recipesToCook.length < 1) {
+        recipeSection.innerHTML = "";
+        recipeSection.innerHTML = `<p class="sad-text">Oh no - you haven't saved any recipes! Looks like you're going hungry tonight 🥲</p>`;
+    }
     if(!savedView) {
         savedView = true;
-        const savedRecipes = currentUser.convertToFullRecipe(recipeRepo);
-        currentView = savedRecipes;
-        searchBar.placeholder = 'Search My Recipes...';
-        document.getElementById('filterPlaceholder').innerText = 'Filter My Recipes';
         toggleHidden(myRecipesTitle);
         toggleHidden(titleLogo);
-        createRecipeCards(currentView);
-        if(currentUser.recipesToCook.length < 1) {
-            recipeSection.innerHTML = "";
-            recipeSection.innerText = "Oh no - you haven't saved any recipes! Looks like you're going hungry tonight 🥲";
-        }
     }
 }
 

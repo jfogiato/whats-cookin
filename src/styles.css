@@ -220,6 +220,12 @@ li {
   margin-bottom: 0.4vmin;
 }
 
+/* MISC. CLASSES */
+.sad-text {
+  font-size: 3rem;
+  margin: 4vmin;
+}
+
 .oregano-font {
   font-family: 'Oregano', cursive;
 }
@@ -285,65 +291,80 @@ li {
   margin: 2cm;
 }
 
-@media only screen and (max-device-width: 600px){
-  body{
+@media only screen and (max-device-width: 600px) {
+  body {
     margin-top: 5%;
   }
+
   .recipe-card {
     height: 92vmin;
     width: 90vmin;
   }
+
   .recipe-img {
     height: 70vmin;
     width: 84vmin;
   }
+
   .recipe-title {
     font-size: 4rem;
     width: 85vmin;
   }
+
   .recipe-popup {
     height: 135vmin;
   }
+
   .close-icon {
     width: 6vmin;
   }
+
   .image-ingredients {
     flex-direction: column;
   }
+
   .button-container {
     flex-direction: column;
     margin-bottom: 10%;
   }
-  .modal-button{
+
+  .modal-button {
     height: 10vmin;
     font-size: 2rem;
     border-width: 5px;
     margin: 2%;
   }
-  h2, .all-recipes{
+
+  h2, .all-recipes {
     font-size: 3rem;
   }
+
   h3, h4, .my-recipes-title {
     font-size: 4rem;
   }
+
   .modal-img {
     height: 80vmin;
     width: 90vmin;
   }
+
   .recipe-popup li {
     font-size: 3rem;
   }
+
   .heart-icon {
     width: 20vmin;
     position: absolute;
     right: 4vmin;
     top: 4vmin;
   }
+
   nav {
     display: flex;
     justify-content: space-between;
     height: 8%;
   }
+
   .nav-links {
     flex-direction: column;
     justify-content: flex-start;
@@ -356,6 +377,7 @@ li {
     left: 25%;
     padding-right: 0;
   }
+
   .my-recipes, .filter-select, .search-bar {
     color: black;
     font-size: 35px;
@@ -366,37 +388,46 @@ li {
     text-align: center;
     margin: 5%;
   }
-  .search-bar{
+
+  .search-bar {
     width: 540px;
     padding-left: inherit;
   }
+
   .nav-logo {
     width: 30vmin;
   }
+
   .menu-icon {
     display: block;
     width: 12vmin;
     margin: 3%;
   }
+
   .close-menu {
     width: 12vmin;
     margin: 3%;
   }
+
   .user-name {
     font-size: 2rem;
   } 
+
   .user-icon {
     display: none;
   }
+
   .filter-select {
     margin-right: 0%;
   }
+  
   .filter-img {
     border: none;
     margin-right: 5%;
     background-color: #E1E1E1;
     height: 100px;
   }
+  
   .hidden {
     display: none;
   }
