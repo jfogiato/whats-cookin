@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
-    "test": "mochapack 'test/**/*.js'"
+    "test": "mochapack 'test/**/*.js'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": "Turing School of Software and Design",
   "license": "MIT",
@@ -14,6 +16,7 @@
     "chai": "^4.3.4",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
+    "gh-pages": "^5.0.0",
     "mocha": "^8.4.0",
     "mochapack": "^2.1.2",
     "sass": "^1.34.0",
@@ -22,5 +25,7 @@
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
-  }
+  },
+  "url": "git+https://github.com/jfogiato/whats-cookin.git",
+  "homepage": "http://jfogiato.github.io/whats-cookin"
 }

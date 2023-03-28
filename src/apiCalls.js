@@ -1,5 +1,5 @@
 function apiRequest(path, request, user, recipe) {
-    return fetch(`http://localhost:3001/api/v1/${path}`, {
+    return fetch(`https://whats-cookin-api.vercel.app/api/v1/${path}`, {
         method: request ? request : "GET",
         body: user ? JSON.stringify({ userID: user.id, recipeID: recipe.id }) : null,
         headers: {
