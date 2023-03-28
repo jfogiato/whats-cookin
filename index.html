@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano&family=Rock+Salt&display=swap" rel="stylesheet">
+    <title>What's Cookin'</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <img class="nav-logo pointer" id="logo" src="./images/home-button.png" alt="Take Me Home" tabindex="0">
+        <img class="menu-icon" id="menuIcon" src="./images/hamburger-menu.png" alt="menu options" tabindex="0">
+        <img class="close-menu hidden" id="closeMenu" src="./images/close-menu.png" alt="close menu" tabindex="0">
+        <menu class="nav-links" id="navLinks">
+            <label for="searchBar" class="off-page">Search Recipes</label>
+            <input type="search" placeholder="Search Recipes..." class="input-bar search-bar hover" id="searchBar">
+            <form>
+                <label for="filters" class="off-page">Filter Recipes</label>
+                <select name="filter-recipes" id="filters" class="input-bar filter-select pointer hover">
+                    <option id="filterPlaceholder" value="" disabled selected>Filter Recipes</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="main course">Main Course</option>
+                    <option value="salad">Salad</option>
+                    <option value="side dish">Side Dish</option>
+                    <option value="dip">Dip</option>
+                    <option value="sauce">Sauce</option>
+                </select>
+                <img class="filter-img pointer hover" id="filterSubmit" src="./images/filter.png" alt="filter recipe submit" tabindex="0">
+            </form>
+            <li id="navMyRecipes" class="my-recipes pointer hover" tabindex="0">My Recipes</li>
+            <li id="navUserInfo" class="user-name"></li>
+        </menu>
+    </nav>
+    <main>
+      <section class="modal-bg hidden" id="recipeModalBackground">
+        <!-- Clicked recipe will be displayed here -->
+      </section>
+        <header>
+            <img class="title-logo" id="titleLogo" src="./images/wc-logo.png" alt="What's Cookin' Title Logo">
+            <h1 class="my-recipes-title hidden" id="myRecipesTitle"></h1>
+        </header>
+        <section class="all-recipes" id="allRecipes">
+            <!-- Recipe cards go here -->
+        </section>
+        <footer>
+            <img class="footer-logo" src="./images/wc-logo.png" alt="What's Cookin' Footer Logo/Take Me Home">
+        </footer>
+    </main>
+    <script src="bundle.js"></script>
+</body>
+</html>
